@@ -14,6 +14,13 @@
 		3D35FC632BF82A1D00B05434 /* Game_Box.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3D35FC612BF82A1D00B05434 /* Game_Box.xcdatamodeld */; };
 		3D35FC652BF82A1E00B05434 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D35FC642BF82A1E00B05434 /* Assets.xcassets */; };
 		3D35FC682BF82A1E00B05434 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 3D35FC672BF82A1E00B05434 /* Base */; };
+		3D8B7ADC2BF8ACC300C62C07 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8B7ADB2BF8ACC300C62C07 /* Constants.swift */; };
+		3D8B7ADF2BF8ACE500C62C07 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8B7ADE2BF8ACE500C62C07 /* Game.swift */; };
+		3D8B7AE12BF8B02500C62C07 /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8B7AE02BF8B02500C62C07 /* GameLogic.swift */; };
+		3D8B7AE32BF8B03200C62C07 /* Webservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8B7AE22BF8B03200C62C07 /* Webservice.swift */; };
+		3D8B7AE52BF8B04900C62C07 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8B7AE42BF8B04900C62C07 /* Router.swift */; };
+		3D8B7AE82BF8B16B00C62C07 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 3D8B7AE72BF8B16B00C62C07 /* Alamofire */; };
+		3D8B7AEA2BF8B16B00C62C07 /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 3D8B7AE92BF8B16B00C62C07 /* AlamofireDynamic */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +33,11 @@
 		3D35FC642BF82A1E00B05434 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3D35FC672BF82A1E00B05434 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3D35FC692BF82A1E00B05434 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3D8B7ADB2BF8ACC300C62C07 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		3D8B7ADE2BF8ACE500C62C07 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		3D8B7AE02BF8B02500C62C07 /* GameLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
+		3D8B7AE22BF8B03200C62C07 /* Webservice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Webservice.swift; sourceTree = "<group>"; };
+		3D8B7AE42BF8B04900C62C07 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +45,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D8B7AE82BF8B16B00C62C07 /* Alamofire in Frameworks */,
+				3D8B7AEA2BF8B16B00C62C07 /* AlamofireDynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,16 +72,61 @@
 		3D35FC572BF82A1D00B05434 /* Game Box */ = {
 			isa = PBXGroup;
 			children = (
-				3D35FC582BF82A1D00B05434 /* AppDelegate.swift */,
-				3D35FC5A2BF82A1D00B05434 /* SceneDelegate.swift */,
+				3D8B7ADD2BF8ACCC00C62C07 /* Model */,
+				3D8B7ADA2BF8ACB700C62C07 /* Constants */,
+				3D8B7AD92BF8A83000C62C07 /* Network */,
+				3D8B7AD82BF8A79D00C62C07 /* Resources */,
+				3D8B7AD62BF8A0CC00C62C07 /* App */,
 				3D35FC5C2BF82A1D00B05434 /* ViewController.swift */,
-				3D35FC5E2BF82A1D00B05434 /* Main.storyboard */,
-				3D35FC642BF82A1E00B05434 /* Assets.xcassets */,
-				3D35FC662BF82A1E00B05434 /* LaunchScreen.storyboard */,
 				3D35FC692BF82A1E00B05434 /* Info.plist */,
-				3D35FC612BF82A1D00B05434 /* Game_Box.xcdatamodeld */,
 			);
 			path = "Game Box";
+			sourceTree = "<group>";
+		};
+		3D8B7AD62BF8A0CC00C62C07 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				3D35FC582BF82A1D00B05434 /* AppDelegate.swift */,
+				3D35FC5A2BF82A1D00B05434 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		3D8B7AD82BF8A79D00C62C07 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3D35FC642BF82A1E00B05434 /* Assets.xcassets */,
+				3D35FC662BF82A1E00B05434 /* LaunchScreen.storyboard */,
+				3D35FC5E2BF82A1D00B05434 /* Main.storyboard */,
+				3D35FC612BF82A1D00B05434 /* Game_Box.xcdatamodeld */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		3D8B7AD92BF8A83000C62C07 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				3D8B7AE02BF8B02500C62C07 /* GameLogic.swift */,
+				3D8B7AE22BF8B03200C62C07 /* Webservice.swift */,
+				3D8B7AE42BF8B04900C62C07 /* Router.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		3D8B7ADA2BF8ACB700C62C07 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				3D8B7ADB2BF8ACC300C62C07 /* Constants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		3D8B7ADD2BF8ACCC00C62C07 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3D8B7ADE2BF8ACE500C62C07 /* Game.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -86,6 +145,10 @@
 			dependencies = (
 			);
 			name = "Game Box";
+			packageProductDependencies = (
+				3D8B7AE72BF8B16B00C62C07 /* Alamofire */,
+				3D8B7AE92BF8B16B00C62C07 /* AlamofireDynamic */,
+			);
 			productName = "Game Box";
 			productReference = 3D35FC552BF82A1D00B05434 /* Game Box.app */;
 			productType = "com.apple.product-type.application";
@@ -114,6 +177,9 @@
 				Base,
 			);
 			mainGroup = 3D35FC4C2BF82A1D00B05434;
+			packageReferences = (
+				3D8B7AE62BF8B16A00C62C07 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = 3D35FC562BF82A1D00B05434 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -141,10 +207,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D8B7ADC2BF8ACC300C62C07 /* Constants.swift in Sources */,
+				3D8B7ADF2BF8ACE500C62C07 /* Game.swift in Sources */,
+				3D8B7AE32BF8B03200C62C07 /* Webservice.swift in Sources */,
 				3D35FC5D2BF82A1D00B05434 /* ViewController.swift in Sources */,
+				3D8B7AE52BF8B04900C62C07 /* Router.swift in Sources */,
 				3D35FC592BF82A1D00B05434 /* AppDelegate.swift in Sources */,
 				3D35FC5B2BF82A1D00B05434 /* SceneDelegate.swift in Sources */,
 				3D35FC632BF82A1D00B05434 /* Game_Box.xcdatamodeld in Sources */,
+				3D8B7AE12BF8B02500C62C07 /* GameLogic.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,6 +436,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3D8B7AE62BF8B16A00C62C07 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3D8B7AE72BF8B16B00C62C07 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3D8B7AE62BF8B16A00C62C07 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		3D8B7AE92BF8B16B00C62C07 /* AlamofireDynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3D8B7AE62BF8B16A00C62C07 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = AlamofireDynamic;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		3D35FC612BF82A1D00B05434 /* Game_Box.xcdatamodeld */ = {
