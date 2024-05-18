@@ -21,6 +21,8 @@
 		3D8B7AE52BF8B04900C62C07 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8B7AE42BF8B04900C62C07 /* Router.swift */; };
 		3D8B7AE82BF8B16B00C62C07 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 3D8B7AE72BF8B16B00C62C07 /* Alamofire */; };
 		3D8B7AEA2BF8B16B00C62C07 /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 3D8B7AE92BF8B16B00C62C07 /* AlamofireDynamic */; };
+		3D8B7AF32BF8C66C00C62C07 /* SlideCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D8B7AF22BF8C66C00C62C07 /* SlideCell.xib */; };
+		3D8B7AF42BF8C66C00C62C07 /* SlideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8B7AF12BF8C66C00C62C07 /* SlideCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		3D8B7AE02BF8B02500C62C07 /* GameLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
 		3D8B7AE22BF8B03200C62C07 /* Webservice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Webservice.swift; sourceTree = "<group>"; };
 		3D8B7AE42BF8B04900C62C07 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		3D8B7AF12BF8C66C00C62C07 /* SlideCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideCell.swift; sourceTree = "<group>"; };
+		3D8B7AF22BF8C66C00C62C07 /* SlideCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SlideCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,12 +76,12 @@
 		3D35FC572BF82A1D00B05434 /* Game Box */ = {
 			isa = PBXGroup;
 			children = (
-				3D8B7ADD2BF8ACCC00C62C07 /* Model */,
+				3D8B7AD62BF8A0CC00C62C07 /* App */,
 				3D8B7ADA2BF8ACB700C62C07 /* Constants */,
 				3D8B7AD92BF8A83000C62C07 /* Network */,
+				3D8B7ADD2BF8ACCC00C62C07 /* Model */,
+				3D8B7AEB2BF8C10E00C62C07 /* Screens */,
 				3D8B7AD82BF8A79D00C62C07 /* Resources */,
-				3D8B7AD62BF8A0CC00C62C07 /* App */,
-				3D35FC5C2BF82A1D00B05434 /* ViewController.swift */,
 				3D35FC692BF82A1E00B05434 /* Info.plist */,
 			);
 			path = "Game Box";
@@ -95,6 +99,9 @@
 		3D8B7AD82BF8A79D00C62C07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3D8B7AEF2BF8C23F00C62C07 /* Extensions */,
+				3D8B7AEE2BF8C21B00C62C07 /* Cells */,
+				3D8B7AED2BF8C16D00C62C07 /* CustomViews */,
 				3D35FC642BF82A1E00B05434 /* Assets.xcassets */,
 				3D35FC662BF82A1E00B05434 /* LaunchScreen.storyboard */,
 				3D35FC5E2BF82A1D00B05434 /* Main.storyboard */,
@@ -127,6 +134,53 @@
 				3D8B7ADE2BF8ACE500C62C07 /* Game.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		3D8B7AEB2BF8C10E00C62C07 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				3D8B7AEC2BF8C11D00C62C07 /* Home */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		3D8B7AEC2BF8C11D00C62C07 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				3D35FC5C2BF82A1D00B05434 /* ViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		3D8B7AED2BF8C16D00C62C07 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		3D8B7AEE2BF8C21B00C62C07 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				3D8B7AF02BF8C60600C62C07 /* SlideCell */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		3D8B7AEF2BF8C23F00C62C07 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3D8B7AF02BF8C60600C62C07 /* SlideCell */ = {
+			isa = PBXGroup;
+			children = (
+				3D8B7AF12BF8C66C00C62C07 /* SlideCell.swift */,
+				3D8B7AF22BF8C66C00C62C07 /* SlideCell.xib */,
+			);
+			path = SlideCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,6 +251,7 @@
 				3D35FC652BF82A1E00B05434 /* Assets.xcassets in Resources */,
 				3D35FC682BF82A1E00B05434 /* Base in Resources */,
 				3D35FC602BF82A1D00B05434 /* Base in Resources */,
+				3D8B7AF32BF8C66C00C62C07 /* SlideCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,6 +269,7 @@
 				3D8B7AE52BF8B04900C62C07 /* Router.swift in Sources */,
 				3D35FC592BF82A1D00B05434 /* AppDelegate.swift in Sources */,
 				3D35FC5B2BF82A1D00B05434 /* SceneDelegate.swift in Sources */,
+				3D8B7AF42BF8C66C00C62C07 /* SlideCell.swift in Sources */,
 				3D35FC632BF82A1D00B05434 /* Game_Box.xcdatamodeld in Sources */,
 				3D8B7AE12BF8B02500C62C07 /* GameLogic.swift in Sources */,
 			);
