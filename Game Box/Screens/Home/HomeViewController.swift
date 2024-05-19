@@ -7,14 +7,18 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class HomeViewController: UIViewController {
 
   // MARK: - Properties
   @IBOutlet weak var gameCollectionView: UICollectionView!
   @IBOutlet weak var sliderCollectionView: UICollectionView!
+  @IBOutlet weak var searchBar: UISearchBar!
   @IBOutlet weak var pageControl: UIPageControl!
   var slides = [UIImage(named: "slide1"), UIImage(named: "slide2"), UIImage(named: "slide3")]
-  var gameList = [Game]()
+  lazy var gameList = [Game]()
+  lazy var filteredGameList = [Game]()
+  var isFiltering: Bool = false
+  var isSliderHidden: Bool = false
   var currentPage = 0 {
     didSet{ pageControl.currentPage = currentPage }
   }
@@ -23,6 +27,7 @@ class ViewController: UIViewController {
   // MARK: - Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
+
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -40,6 +45,7 @@ class ViewController: UIViewController {
     configurationCollectionView()
     configureTimer()
     fetchGames()
+    searchBar.delegate = self
   }
 
   private func fetchGames(){
@@ -85,10 +91,14 @@ class ViewController: UIViewController {
 }
 
 // MARK: - CollectionView Delegates
-extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return collectionView == sliderCollectionView ? slides.count : gameList.count
+    if collectionView == sliderCollectionView {
+      return slides.count
+    } else {
+      return isFiltering ? filteredGameList.count : gameList.count
+    }
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -99,7 +109,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
       return cell
     } else {
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GameCell.identifier, for: indexPath) as! GameCell
-      let game = gameList[indexPath.row]
+      let game = isFiltering ? filteredGameList[indexPath.row] : gameList[indexPath.row]
       cell.setup(game: game)
       return cell
     }
@@ -112,5 +122,27 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
   func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
     let width = scrollView.frame.width
     currentPage = Int(scrollView.contentOffset.x / width )
+  }
+}
+
+extension HomeViewController: UISearchBarDelegate {
+
+  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    if searchText.count < 3 {
+      isFiltering = false
+      filteredGameList = []
+      pageControl.isHidden = false
+      sliderCollectionView.isHidden = false
+      gameCollectionView.reloadData()
+    } else {
+      isFiltering = true
+      filteredGameList = gameList.filter {
+        pageControl.isHidden = true
+        sliderCollectionView.isHidden = true
+        guard let name = $0.name else { return false }
+        return name.lowercased().contains(searchText.lowercased())
+      }
+      gameCollectionView.reloadData()
+    }
   }
 }

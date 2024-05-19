@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Home View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Game_Box" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="Game_Box" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -75,6 +75,7 @@
                     <connections>
                         <outlet property="gameCollectionView" destination="Uka-q1-iXv" id="F1R-2h-Pm3"/>
                         <outlet property="pageControl" destination="KvP-Yh-Kzt" id="kWh-f4-8Eg"/>
+                        <outlet property="searchBar" destination="flo-52-oig" id="olr-hH-j1H"/>
                         <outlet property="sliderCollectionView" destination="nxR-XX-EXk" id="DG8-fv-G5P"/>
                     </connections>
                 </viewController>
