@@ -10,9 +10,11 @@ import UIKit
 class ViewController: UIViewController {
 
   // MARK: - Properties
+  @IBOutlet weak var gameCollectionView: UICollectionView!
   @IBOutlet weak var sliderCollectionView: UICollectionView!
   @IBOutlet weak var pageControl: UIPageControl!
   var slides = [UIImage(named: "slide1"), UIImage(named: "slide2"), UIImage(named: "slide3")]
+  var gameList = [Game]()
   var currentPage = 0 {
     didSet{ pageControl.currentPage = currentPage }
   }
@@ -21,6 +23,10 @@ class ViewController: UIViewController {
   // MARK: - Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
+  }
+
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
     setupUI()
   }
 
@@ -33,6 +39,24 @@ class ViewController: UIViewController {
   private func setupUI(){
     configurationCollectionView()
     configureTimer()
+    fetchGames()
+  }
+
+  private func fetchGames(){
+    GameLogic.shared.getAllGames { [weak self] result in
+      guard let self else { return }
+      switch result {
+      case .success(let gameResponse):
+        if let games = gameResponse.results {
+          gameList = games
+        }
+        DispatchQueue.main.async {
+          self.gameCollectionView.reloadData()
+        }
+      case .failure(let error):
+        print(error.localizedDescription)
+      }
+    }
   }
 
   private func configurationCollectionView(){
@@ -41,10 +65,15 @@ class ViewController: UIViewController {
     sliderCollectionView.delegate = self
     sliderCollectionView.dataSource = self
     sliderCollectionView.register(UINib(nibName: SlideCell.identifier, bundle: nil), forCellWithReuseIdentifier: SlideCell.identifier)
+
+    // MARK: - Game CollectionView
+    gameCollectionView.delegate = self
+    gameCollectionView.dataSource = self
+    gameCollectionView.register(UINib(nibName: GameCell.identifier, bundle: nil), forCellWithReuseIdentifier: GameCell.identifier)
   }
 
   private func configureTimer() {
-    timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(autoScroll), userInfo: nil, repeats: true)
+    timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(autoScroll), userInfo: nil, repeats: true)
   }
 
   // MARK: - Selectors
@@ -56,18 +85,24 @@ class ViewController: UIViewController {
 }
 
 // MARK: - CollectionView Delegates
-
 extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    slides.count
+    return collectionView == sliderCollectionView ? slides.count : gameList.count
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SlideCell.identifier, for: indexPath) as! SlideCell
-    let item = slides[indexPath.row]
-    cell.slideImageView.image = item
-    return cell
+    if collectionView == sliderCollectionView {
+      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SlideCell.identifier, for: indexPath) as! SlideCell
+      let item = slides[indexPath.row]
+      cell.slideImageView.image = item
+      return cell
+    } else {
+      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GameCell.identifier, for: indexPath) as! GameCell
+      let game = gameList[indexPath.row]
+      cell.setup(game: game)
+      return cell
+    }
   }
 
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

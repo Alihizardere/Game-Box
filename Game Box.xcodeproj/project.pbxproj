@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D0118FD2BFA0AF700C1DB60 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 3D0118FC2BFA0AF700C1DB60 /* Kingfisher */; };
 		3D35FC592BF82A1D00B05434 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D35FC582BF82A1D00B05434 /* AppDelegate.swift */; };
 		3D35FC5B2BF82A1D00B05434 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D35FC5A2BF82A1D00B05434 /* SceneDelegate.swift */; };
 		3D35FC5D2BF82A1D00B05434 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D35FC5C2BF82A1D00B05434 /* ViewController.swift */; };
@@ -14,6 +15,8 @@
 		3D35FC632BF82A1D00B05434 /* Game_Box.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3D35FC612BF82A1D00B05434 /* Game_Box.xcdatamodeld */; };
 		3D35FC652BF82A1E00B05434 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D35FC642BF82A1E00B05434 /* Assets.xcassets */; };
 		3D35FC682BF82A1E00B05434 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 3D35FC672BF82A1E00B05434 /* Base */; };
+		3D3EDCE62BF9661600C864D6 /* GameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3EDCE42BF9661600C864D6 /* GameCell.swift */; };
+		3D3EDCE72BF9661600C864D6 /* GameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D3EDCE52BF9661600C864D6 /* GameCell.xib */; };
 		3D8B7ADC2BF8ACC300C62C07 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8B7ADB2BF8ACC300C62C07 /* Constants.swift */; };
 		3D8B7ADF2BF8ACE500C62C07 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8B7ADE2BF8ACE500C62C07 /* Game.swift */; };
 		3D8B7AE12BF8B02500C62C07 /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8B7AE02BF8B02500C62C07 /* GameLogic.swift */; };
@@ -35,6 +38,8 @@
 		3D35FC642BF82A1E00B05434 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3D35FC672BF82A1E00B05434 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3D35FC692BF82A1E00B05434 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3D3EDCE42BF9661600C864D6 /* GameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCell.swift; sourceTree = "<group>"; };
+		3D3EDCE52BF9661600C864D6 /* GameCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameCell.xib; sourceTree = "<group>"; };
 		3D8B7ADB2BF8ACC300C62C07 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3D8B7ADE2BF8ACE500C62C07 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		3D8B7AE02BF8B02500C62C07 /* GameLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
@@ -49,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D0118FD2BFA0AF700C1DB60 /* Kingfisher in Frameworks */,
 				3D8B7AE82BF8B16B00C62C07 /* Alamofire in Frameworks */,
 				3D8B7AEA2BF8B16B00C62C07 /* AlamofireDynamic in Frameworks */,
 			);
@@ -85,6 +91,15 @@
 				3D35FC692BF82A1E00B05434 /* Info.plist */,
 			);
 			path = "Game Box";
+			sourceTree = "<group>";
+		};
+		3D3EDCE32BF965D600C864D6 /* GameCell */ = {
+			isa = PBXGroup;
+			children = (
+				3D3EDCE42BF9661600C864D6 /* GameCell.swift */,
+				3D3EDCE52BF9661600C864D6 /* GameCell.xib */,
+			);
+			path = GameCell;
 			sourceTree = "<group>";
 		};
 		3D8B7AD62BF8A0CC00C62C07 /* App */ = {
@@ -163,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				3D8B7AF02BF8C60600C62C07 /* SlideCell */,
+				3D3EDCE32BF965D600C864D6 /* GameCell */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -202,6 +218,7 @@
 			packageProductDependencies = (
 				3D8B7AE72BF8B16B00C62C07 /* Alamofire */,
 				3D8B7AE92BF8B16B00C62C07 /* AlamofireDynamic */,
+				3D0118FC2BFA0AF700C1DB60 /* Kingfisher */,
 			);
 			productName = "Game Box";
 			productReference = 3D35FC552BF82A1D00B05434 /* Game Box.app */;
@@ -233,6 +250,7 @@
 			mainGroup = 3D35FC4C2BF82A1D00B05434;
 			packageReferences = (
 				3D8B7AE62BF8B16A00C62C07 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				3D0118FB2BFA0AF700C1DB60 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 3D35FC562BF82A1D00B05434 /* Products */;
 			projectDirPath = "";
@@ -249,6 +267,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D35FC652BF82A1E00B05434 /* Assets.xcassets in Resources */,
+				3D3EDCE72BF9661600C864D6 /* GameCell.xib in Resources */,
 				3D35FC682BF82A1E00B05434 /* Base in Resources */,
 				3D35FC602BF82A1D00B05434 /* Base in Resources */,
 				3D8B7AF32BF8C66C00C62C07 /* SlideCell.xib in Resources */,
@@ -265,6 +284,7 @@
 				3D8B7ADC2BF8ACC300C62C07 /* Constants.swift in Sources */,
 				3D8B7ADF2BF8ACE500C62C07 /* Game.swift in Sources */,
 				3D8B7AE32BF8B03200C62C07 /* Webservice.swift in Sources */,
+				3D3EDCE62BF9661600C864D6 /* GameCell.swift in Sources */,
 				3D35FC5D2BF82A1D00B05434 /* ViewController.swift in Sources */,
 				3D8B7AE52BF8B04900C62C07 /* Router.swift in Sources */,
 				3D35FC592BF82A1D00B05434 /* AppDelegate.swift in Sources */,
@@ -494,6 +514,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3D0118FB2BFA0AF700C1DB60 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.11.0;
+			};
+		};
 		3D8B7AE62BF8B16A00C62C07 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -505,6 +533,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3D0118FC2BFA0AF700C1DB60 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3D0118FB2BFA0AF700C1DB60 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		3D8B7AE72BF8B16B00C62C07 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3D8B7AE62BF8B16A00C62C07 /* XCRemoteSwiftPackageReference "Alamofire" */;
