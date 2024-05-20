@@ -11,18 +11,19 @@ import Alamofire
 enum Router: URLRequestConvertible {
 
   case allGames
+  case gameDetail(id: Int)
 
   // MARK: - method
   var method: HTTPMethod {
     switch self {
-    case .allGames:
-      return .get
+    case .allGames, .gameDetail:
+      return  .get
     }
   }
   // MARK: - Parameters
   var parameters: [String: Any]? {
     switch self {
-    case .allGames:
+    case .allGames, .gameDetail:
         return nil
     }
   }
@@ -35,6 +36,9 @@ enum Router: URLRequestConvertible {
     switch self {
     case .allGames:
       let url = URL(string: Constants.gameURL)
+      return url!
+    case .gameDetail(let id):
+      let url = URL(string: Constants.baseURL+"/\(id)"+Constants.apiKey)
       return url!
     }
   }

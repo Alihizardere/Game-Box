@@ -14,7 +14,6 @@ class HomeViewController: UIViewController {
   @IBOutlet weak var sliderCollectionView: UICollectionView!
   @IBOutlet weak var searchBar: UISearchBar!
   @IBOutlet weak var pageControl: UIPageControl!
-  var slides = [UIImage(named: "slide1"), UIImage(named: "slide2"), UIImage(named: "slide3")]
   lazy var gameList = [Game]()
   lazy var filteredGameList = [Game]()
   var isFiltering: Bool = false
@@ -27,7 +26,6 @@ class HomeViewController: UIViewController {
   // MARK: - Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
-
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -65,6 +63,25 @@ class HomeViewController: UIViewController {
     }
   }
 
+  private func fetchDetail(gameId: Int) {
+    GameLogic.shared.getDetailGame(gameId: gameId) {  result in
+      switch result {
+      case .success(let gameDetail):
+        self.performSegue(withIdentifier: "toDetail", sender: gameDetail)
+      case .failure(let error):
+        print(error.localizedDescription)
+      }
+    }
+  }
+
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "toDetail" {
+      let destinationVC = segue.destination as! DetailViewController
+      guard let game = sender as? GameDetail else { return }
+      destinationVC.selectedGame = game
+    }
+  }
+
   private func configurationCollectionView(){
 
     // MARK: - Slider CollectionView
@@ -84,7 +101,7 @@ class HomeViewController: UIViewController {
 
   // MARK: - Selectors
   @objc private func autoScroll() {
-    currentPage = currentPage < slides.count - 1 ? currentPage + 1 : 0
+    currentPage = currentPage < Constants.slides.count - 1 ? currentPage + 1 : 0
     let indexPath = IndexPath(item: currentPage, section: 0)
     sliderCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
   }
@@ -94,24 +111,39 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    if collectionView == sliderCollectionView {
-      return slides.count
-    } else {
+    switch collectionView {
+    case sliderCollectionView:
+      return Constants.slides.count
+    case gameCollectionView:
       return isFiltering ? filteredGameList.count : gameList.count
+    default:
+      return 0
     }
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    if collectionView == sliderCollectionView {
+    switch collectionView {
+
+    case sliderCollectionView:
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SlideCell.identifier, for: indexPath) as! SlideCell
-      let item = slides[indexPath.row]
+      let item = Constants.slides[indexPath.row]
       cell.slideImageView.image = item
       return cell
-    } else {
+    case gameCollectionView:
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GameCell.identifier, for: indexPath) as! GameCell
       let game = isFiltering ? filteredGameList[indexPath.row] : gameList[indexPath.row]
       cell.setup(game: game)
       return cell
+    default:
+      fatalError("Unexpected collection view")
+    }
+  }
+
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    if collectionView ==  gameCollectionView {
+      let game = gameList[indexPath.row]
+      guard let id = game.id else { return }
+      fetchDetail(gameId: id)
     }
   }
 
@@ -125,6 +157,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
   }
 }
 
+// MARK: - SearchBar Delegates
 extension HomeViewController: UISearchBarDelegate {
 
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

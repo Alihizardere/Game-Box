@@ -77,11 +77,28 @@
                         <outlet property="pageControl" destination="KvP-Yh-Kzt" id="kWh-f4-8Eg"/>
                         <outlet property="searchBar" destination="flo-52-oig" id="olr-hH-j1H"/>
                         <outlet property="sliderCollectionView" destination="nxR-XX-EXk" id="DG8-fv-G5P"/>
+                        <segue destination="HHq-5a-Jiu" kind="show" identifier="toDetail" id="DfC-WZ-Hll"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="93.89312977099236" y="-27.464788732394368"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="djU-c8-cxK">
+            <objects>
+                <viewController id="HHq-5a-Jiu" customClass="DetailViewController" customModule="Game_Box" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XvY-o9-Vvj">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="oJp-gK-aai"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="4Cm-NT-5A3"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lbu-yc-OL9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="935" y="-27"/>
         </scene>
     </scenes>
     <resources>
