@@ -17,11 +17,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     guard let windowScene = (scene as? UIWindowScene) else { return }
     self.window = UIWindow(windowScene: windowScene)
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    guard let rootVC = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController  else { return }
-    let viewModel = HomeViewModel()
-    rootVC.viewModel = viewModel
+    guard let tabBarController = storyboard.instantiateViewController(withIdentifier: "HomeTB") as? UITabBarController  else { return }
+
+    if let navController = tabBarController.viewControllers?.first as? UINavigationController,
+       let rootVC = navController.viewControllers.first as? HomeViewController {
+      let viewModel = HomeViewModel()
+      rootVC.viewModel = viewModel
+    }
     self.window?.makeKeyAndVisible()
-    self.window?.rootViewController = rootVC
+    self.window?.rootViewController = tabBarController
+
   }
 
   func sceneDidDisconnect(_ scene: UIScene) {

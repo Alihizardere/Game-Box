@@ -29,6 +29,7 @@
 		3D8B7AEA2BF8B16B00C62C07 /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 3D8B7AE92BF8B16B00C62C07 /* AlamofireDynamic */; };
 		3D8B7AF32BF8C66C00C62C07 /* SlideCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D8B7AF22BF8C66C00C62C07 /* SlideCell.xib */; };
 		3D8B7AF42BF8C66C00C62C07 /* SlideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8B7AF12BF8C66C00C62C07 /* SlideCell.swift */; };
+		3DA633922BFD64F100B520EB /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA633912BFD64F100B520EB /* CustomTabBar.swift */; };
 		3DF04C442BFB961800649D02 /* UICollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF04C432BFB961800649D02 /* UICollectionViewCell.swift */; };
 		3DF04C462BFB96C400649D02 /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF04C452BFB96C400649D02 /* UICollectionView.swift */; };
 /* End PBXBuildFile section */
@@ -55,6 +56,7 @@
 		3D8B7AE42BF8B04900C62C07 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		3D8B7AF12BF8C66C00C62C07 /* SlideCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideCell.swift; sourceTree = "<group>"; };
 		3D8B7AF22BF8C66C00C62C07 /* SlideCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SlideCell.xib; sourceTree = "<group>"; };
+		3DA633912BFD64F100B520EB /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		3DF04C432BFB961800649D02 /* UICollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewCell.swift; sourceTree = "<group>"; };
 		3DF04C452BFB96C400649D02 /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -191,6 +193,7 @@
 		3D8B7AED2BF8C16D00C62C07 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				3DA633902BFD64C500B520EB /* TabBar */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -220,6 +223,14 @@
 				3D8B7AF22BF8C66C00C62C07 /* SlideCell.xib */,
 			);
 			path = SlideCell;
+			sourceTree = "<group>";
+		};
+		3DA633902BFD64C500B520EB /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				3DA633912BFD64F100B520EB /* CustomTabBar.swift */,
+			);
+			path = TabBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -312,6 +323,7 @@
 				3D8B7AE32BF8B03200C62C07 /* Webservice.swift in Sources */,
 				3D3EDCE62BF9661600C864D6 /* GameCell.swift in Sources */,
 				3D88D9DD2BFAAD4F0031CE14 /* GameDetail.swift in Sources */,
+				3DA633922BFD64F100B520EB /* CustomTabBar.swift in Sources */,
 				3D35FC5D2BF82A1D00B05434 /* HomeViewController.swift in Sources */,
 				3D8B7AE52BF8B04900C62C07 /* Router.swift in Sources */,
 				3DF04C442BFB961800649D02 /* UICollectionViewCell.swift in Sources */,

@@ -27,6 +27,7 @@ class HomeViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     viewModel.load()
+    navigationController?.isNavigationBarHidden = true
   }
 
   override func viewWillDisappear(_ animated: Bool) {
@@ -39,7 +40,9 @@ class HomeViewController: UIViewController {
     configurationCollectionView()
     viewModel.startTimer()
     searchBar.delegate = self
+
   }
+
 
   private func fetchDetail(gameId: Int) {
     viewModel.fetchDetail(gameId: gameId)
