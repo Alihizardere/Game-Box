@@ -15,7 +15,7 @@ class CustomTabBar: UITabBarController {
   }
 
   private func setupBlurEffect() {
-    let blurEffect = UIBlurEffect(style: .systemMaterialDark)
+    let blurEffect = UIBlurEffect(style: .systemThinMaterialDark)
     let blurEffectView = UIVisualEffectView(effect: blurEffect)
     blurEffectView.frame = tabBar.bounds
     blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

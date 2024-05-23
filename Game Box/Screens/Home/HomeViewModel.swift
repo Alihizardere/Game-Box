@@ -11,6 +11,7 @@ protocol HomeViewModelDelegate: AnyObject {
   func reloadData()
   func navigateToDetail(with gameDetail: GameDetail)
   func updatePageControl(currentPage: Int)
+  func updateBackgroundImage(page : Int)
 }
 
 protocol HomeViewModelProtocol {
@@ -71,6 +72,7 @@ extension HomeViewModel: HomeViewModelProtocol {
   func updateCurrentPage(to page: Int) {
     currentPage = page
     delegate?.updatePageControl(currentPage: currentPage)
+    delegate?.updateBackgroundImage(page: currentPage)
   }
 
 
@@ -112,5 +114,6 @@ extension HomeViewModel: HomeViewModelProtocol {
   @objc func autoScroll() {
     currentPage = currentPage < Constants.slides.count - 1 ? currentPage + 1 : 0
     delegate?.updatePageControl(currentPage: currentPage)
+    delegate?.updateBackgroundImage(page: currentPage)
   }
 }

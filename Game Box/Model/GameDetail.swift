@@ -25,6 +25,7 @@ struct GameDetail: Decodable {
     let playtime, screenshotsCount, moviesCount, creatorsCount: Int?
     let achievementsCount, parentAchievementsCount: Int?
     let redditURL: String?
+    let genres: [Genre]?
     let redditName, redditDescription, redditLogo: String?
     let redditCount, twitchCount, youtubeCount, reviewsTextCount: Int?
     let suggestionsCount: Int?
@@ -48,6 +49,7 @@ struct GameDetail: Decodable {
         case ratingTop = "rating_top"
         case reactions, added
         case playtime
+        case genres
         case screenshotsCount = "screenshots_count"
         case moviesCount = "movies_count"
         case creatorsCount = "creators_count"
@@ -75,6 +77,18 @@ struct GameDetail: Decodable {
     }
 }
 
+// MARK: - Genre
+struct Genre: Decodable {
+  let id: Int?
+  let name, slug: String?
+  let imageBackground: String?
+
+  enum CodingKeys: String, CodingKey {
+    case id, name, slug
+    case imageBackground = "image_background"
+  }
+}
+
 // MARK: - MetacriticPlatform
 struct MetacriticPlatform: Decodable {
     let metascore: Int?
@@ -93,4 +107,7 @@ struct Store: Decodable {
     let id: Int?
     let url: String?
 }
+
+
+
 

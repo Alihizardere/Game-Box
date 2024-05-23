@@ -14,6 +14,7 @@ class HomeViewController: UIViewController {
   @IBOutlet weak var sliderCollectionView: UICollectionView!
   @IBOutlet weak var searchBar: UISearchBar!
   @IBOutlet weak var pageControl: UIPageControl!
+  @IBOutlet weak var backgroundImage: UIImageView!
   var viewModel: HomeViewModelProtocol! {
     didSet { viewModel.delegate = self }
   }
@@ -27,6 +28,7 @@ class HomeViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     viewModel.load()
+    viewModel.startTimer()
     navigationController?.isNavigationBarHidden = true
   }
 
@@ -38,11 +40,8 @@ class HomeViewController: UIViewController {
   // MARK: - Functions
   private func setupUI(){
     configurationCollectionView()
-    viewModel.startTimer()
     searchBar.delegate = self
-
   }
-
 
   private func fetchDetail(gameId: Int) {
     viewModel.fetchDetail(gameId: gameId)
@@ -62,6 +61,7 @@ class HomeViewController: UIViewController {
     sliderCollectionView.delegate = self
     sliderCollectionView.dataSource = self
     sliderCollectionView.register(cellType: SlideCell.self)
+    sliderCollectionView.layer.cornerRadius = 10
 
     // MARK: - Game CollectionView
     gameCollectionView.delegate = self
@@ -116,9 +116,11 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
   }
 
   func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-    let width = scrollView.frame.width
-    let currentPage = Int(scrollView.contentOffset.x / width )
-    viewModel.updateCurrentPage(to: currentPage)
+    if scrollView == sliderCollectionView {
+      let width = scrollView.frame.width
+      let currentPage = Int(scrollView.contentOffset.x / width )
+      viewModel.updateCurrentPage(to: currentPage)
+    }
   }
 }
 
@@ -131,6 +133,7 @@ extension HomeViewController: UISearchBarDelegate {
 
 // MARK: - HomeViewModelDelegate
 extension HomeViewController:  HomeViewModelDelegate {
+
   func reloadData() {
     gameCollectionView.reloadData()
   }
@@ -139,10 +142,15 @@ extension HomeViewController:  HomeViewModelDelegate {
       performSegue(withIdentifier: "toDetail", sender: gameDetail)
   }
 
+  func updateBackgroundImage(page: Int) {
+    backgroundImage.image = Constants.slides[page]
+  }
+
   func updatePageControl(currentPage: Int) {
     pageControl.currentPage = currentPage
     let indexPath = IndexPath(item: currentPage, section: 0)
     sliderCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+    updateBackgroundImage(page: currentPage)
   }
 }
 

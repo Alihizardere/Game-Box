@@ -64,8 +64,6 @@ struct Game: Decodable {
     let saturatedColor, dominantColor: Color?
     let platforms: [PlatformElement]?
     let parentPlatforms: [ParentPlatform]?
-    let genres: [Genre]?
-    let tags: [Genre]?
     let esrbRating: EsrbRating?
     let shortScreenshots: [ShortScreenshot]?
 
@@ -87,7 +85,6 @@ struct Game: Decodable {
         case dominantColor = "dominant_color"
         case platforms
         case parentPlatforms = "parent_platforms"
-        case genres, tags
         case esrbRating = "esrb_rating"
         case shortScreenshots = "short_screenshots"
     }
@@ -107,23 +104,6 @@ enum Color: String, Decodable {
 struct EsrbRating: Decodable {
     let id: Int?
     let name, slug: String?
-}
-
-// MARK: - Genre
-struct Genre: Decodable {
-    let id: Int?
-    let name, slug: String?
-    let gamesCount: Int?
-    let imageBackground: String?
-    let domain: Domain?
-    let language: Language?
-
-    enum CodingKeys: String, CodingKey {
-        case id, name, slug
-        case gamesCount = "games_count"
-        case imageBackground = "image_background"
-        case domain, language
-    }
 }
 
 enum Domain: String, Decodable {

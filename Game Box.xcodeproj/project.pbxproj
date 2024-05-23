@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		3D0118FD2BFA0AF700C1DB60 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 3D0118FC2BFA0AF700C1DB60 /* Kingfisher */; };
+		3D1524782BFFE25F0053D0DD /* InformationCustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D1524772BFFE25F0053D0DD /* InformationCustomView.xib */; };
+		3D15247A2BFFE26E0053D0DD /* InformationCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1524792BFFE26E0053D0DD /* InformationCustomView.swift */; };
+		3D15247D2BFFE2A80053D0DD /* SkillCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D15247C2BFFE2A80053D0DD /* SkillCustomView.swift */; };
+		3D15247F2BFFE2B10053D0DD /* SkillCustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D15247E2BFFE2B10053D0DD /* SkillCustomView.xib */; };
 		3D238CA12BFB653300DEC874 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D238CA02BFB653300DEC874 /* DetailViewController.swift */; };
 		3D35FC592BF82A1D00B05434 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D35FC582BF82A1D00B05434 /* AppDelegate.swift */; };
 		3D35FC5B2BF82A1D00B05434 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D35FC5A2BF82A1D00B05434 /* SceneDelegate.swift */; };
@@ -35,6 +39,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3D1524772BFFE25F0053D0DD /* InformationCustomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InformationCustomView.xib; sourceTree = "<group>"; };
+		3D1524792BFFE26E0053D0DD /* InformationCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationCustomView.swift; sourceTree = "<group>"; };
+		3D15247C2BFFE2A80053D0DD /* SkillCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillCustomView.swift; sourceTree = "<group>"; };
+		3D15247E2BFFE2B10053D0DD /* SkillCustomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SkillCustomView.xib; sourceTree = "<group>"; };
 		3D238CA02BFB653300DEC874 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		3D35FC552BF82A1D00B05434 /* Game Box.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Game Box.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D35FC582BF82A1D00B05434 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -75,6 +83,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3D1524762BFFE22D0053D0DD /* InformationCustomView */ = {
+			isa = PBXGroup;
+			children = (
+				3D1524792BFFE26E0053D0DD /* InformationCustomView.swift */,
+				3D1524772BFFE25F0053D0DD /* InformationCustomView.xib */,
+			);
+			path = InformationCustomView;
+			sourceTree = "<group>";
+		};
+		3D15247B2BFFE2740053D0DD /* SkillCustomView */ = {
+			isa = PBXGroup;
+			children = (
+				3D15247C2BFFE2A80053D0DD /* SkillCustomView.swift */,
+				3D15247E2BFFE2B10053D0DD /* SkillCustomView.xib */,
+			);
+			path = SkillCustomView;
+			sourceTree = "<group>";
+		};
 		3D238C9F2BFB64FF00DEC874 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
@@ -193,6 +219,8 @@
 		3D8B7AED2BF8C16D00C62C07 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				3D15247B2BFFE2740053D0DD /* SkillCustomView */,
+				3D1524762BFFE22D0053D0DD /* InformationCustomView */,
 				3DA633902BFD64C500B520EB /* TabBar */,
 			);
 			path = CustomViews;
@@ -304,6 +332,8 @@
 				3D3EDCE72BF9661600C864D6 /* GameCell.xib in Resources */,
 				3D35FC682BF82A1E00B05434 /* Base in Resources */,
 				3D35FC602BF82A1D00B05434 /* Base in Resources */,
+				3D15247F2BFFE2B10053D0DD /* SkillCustomView.xib in Resources */,
+				3D1524782BFFE25F0053D0DD /* InformationCustomView.xib in Resources */,
 				3D8B7AF32BF8C66C00C62C07 /* SlideCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -321,6 +351,7 @@
 				3D881B472BFCD17A00AC40EF /* HomeViewModel.swift in Sources */,
 				3D8B7ADF2BF8ACE500C62C07 /* Game.swift in Sources */,
 				3D8B7AE32BF8B03200C62C07 /* Webservice.swift in Sources */,
+				3D15247A2BFFE26E0053D0DD /* InformationCustomView.swift in Sources */,
 				3D3EDCE62BF9661600C864D6 /* GameCell.swift in Sources */,
 				3D88D9DD2BFAAD4F0031CE14 /* GameDetail.swift in Sources */,
 				3DA633922BFD64F100B520EB /* CustomTabBar.swift in Sources */,
@@ -331,6 +362,7 @@
 				3D35FC5B2BF82A1D00B05434 /* SceneDelegate.swift in Sources */,
 				3D8B7AF42BF8C66C00C62C07 /* SlideCell.swift in Sources */,
 				3D35FC632BF82A1D00B05434 /* Game_Box.xcdatamodeld in Sources */,
+				3D15247D2BFFE2A80053D0DD /* SkillCustomView.swift in Sources */,
 				3D8B7AE12BF8B02500C62C07 /* GameLogic.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
