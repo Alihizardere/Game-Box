@@ -146,11 +146,11 @@
             </objects>
             <point key="canvasLocation" x="1947.3282442748091" y="-27.464788732394368"/>
         </scene>
-        <!--Anasayfa-->
+        <!--Homepage-->
         <scene sceneID="2i5-Nh-Lfm">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="g8o-gn-cbn" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Anasayfa" image="house" catalog="system" selectedImage="house.fill" id="rJY-K9-65d"/>
+                    <tabBarItem key="tabBarItem" title="Homepage" image="house" catalog="system" selectedImage="house.fill" id="rJY-K9-65d"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZiH-ul-ojL">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -166,21 +166,36 @@
             </objects>
             <point key="canvasLocation" x="1020.6106870229007" y="-27.464788732394368"/>
         </scene>
-        <!--Favoriler-->
+        <!--Favorites-->
         <scene sceneID="Fsp-5M-evz">
             <objects>
-                <viewController id="qgz-4u-5VE" sceneMemberID="viewController">
+                <viewController id="qgz-4u-5VE" customClass="FavoritesViewController" customModule="Game_Box" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mA3-fW-IbI">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bp1-KL-OlX">
+                                <rect key="frame" x="0.0" y="139" width="393" height="630"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="SMc-hY-Odn"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="SMc-hY-Odn" firstAttribute="trailing" secondItem="bp1-KL-OlX" secondAttribute="trailing" id="3F4-1S-ad8"/>
+                            <constraint firstItem="bp1-KL-OlX" firstAttribute="top" secondItem="SMc-hY-Odn" secondAttribute="top" constant="80" id="Dbp-dT-uND"/>
+                            <constraint firstItem="bp1-KL-OlX" firstAttribute="leading" secondItem="SMc-hY-Odn" secondAttribute="leading" id="nR8-IP-D3R"/>
+                            <constraint firstItem="SMc-hY-Odn" firstAttribute="bottom" secondItem="bp1-KL-OlX" secondAttribute="bottom" id="oxg-wV-aAP"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Favoriler" image="star" catalog="system" selectedImage="star.fill" id="xpE-EI-Kkr"/>
+                    <tabBarItem key="tabBarItem" title="Favorites" image="star" catalog="system" selectedImage="star.fill" id="xpE-EI-Kkr"/>
+                    <connections>
+                        <outlet property="favoriteTableView" destination="bp1-KL-OlX" id="0LV-3C-FQG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p2Q-Hf-HhA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="94" y="754"/>
+            <point key="canvasLocation" x="93.89312977099236" y="753.52112676056345"/>
         </scene>
         <!--Custom Tab Bar-->
         <scene sceneID="thh-rQ-JOu">
@@ -256,22 +271,20 @@
                                                                     <state key="normal" title="Button"/>
                                                                     <buttonConfiguration key="configuration" style="plain" title="FRAGMANI İZLE"/>
                                                                 </button>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kLO-rB-He6">
-                                                                    <rect key="frame" x="315" y="5.6666666666666679" width="46" height="34.333333333333329"/>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zsc-S6-FEz">
+                                                                    <rect key="frame" x="315" y="0.0" width="46" height="46"/>
                                                                     <color key="backgroundColor" name="buttonColor"/>
-                                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="46" id="JdT-la-DnR"/>
-                                                                        <constraint firstAttribute="height" constant="46" id="jvE-aZ-h3I"/>
+                                                                        <constraint firstAttribute="height" constant="46" id="lyx-h1-gZ7"/>
+                                                                        <constraint firstAttribute="width" constant="46" id="rrz-E4-htA"/>
                                                                     </constraints>
-                                                                    <imageReference key="image" image="ellipsis" catalog="system" symbolScale="large" renderingMode="original"/>
-                                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="16" scale="small" weight="semibold"/>
-                                                                    <userDefinedRuntimeAttributes>
-                                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                            <integer key="value" value="18"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                    </userDefinedRuntimeAttributes>
-                                                                </imageView>
+                                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <state key="normal" title="Button"/>
+                                                                    <buttonConfiguration key="configuration" style="plain" image="star.fill" catalog="system"/>
+                                                                    <connections>
+                                                                        <action selector="favoritesButtonTapped:" destination="P4l-Ny-TNo" eventType="touchUpInside" id="Fbz-l5-LZU"/>
+                                                                    </connections>
+                                                                </button>
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Xan-vW-J1M">
@@ -397,6 +410,7 @@
                         <outlet property="backgroundImage" destination="hrH-S5-gBs" id="dl5-Tk-pTG"/>
                         <outlet property="categoryName" destination="LnN-eH-W83" id="Skl-9D-BqM"/>
                         <outlet property="contentView" destination="1V6-GP-CNa" id="V3n-tc-nIR"/>
+                        <outlet property="favoritesButton" destination="zsc-S6-FEz" id="jdo-X0-COG"/>
                         <outlet property="gameImage" destination="YOn-sr-vLC" id="VAu-8i-KfW"/>
                         <outlet property="gameNameLabel" destination="9oJ-Xg-QeT" id="g5g-Ye-65L"/>
                         <outlet property="gameReleasedDate" destination="dIp-2i-KGt" id="tM2-ek-ALb"/>
@@ -411,7 +425,6 @@
     </scenes>
     <resources>
         <image name="chevron.left.circle.fill" catalog="system" width="128" height="123"/>
-        <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="house" catalog="system" width="128" height="104"/>
         <image name="house.fill" catalog="system" width="128" height="104"/>
         <image name="logo" width="16" height="16"/>

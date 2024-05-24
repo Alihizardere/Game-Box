@@ -30,6 +30,9 @@
 		3D449DDF2C00621700739AB7 /* PublisherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D449DDD2C00621700739AB7 /* PublisherCell.xib */; };
 		3D449DE32C00B16800739AB7 /* TagCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D449DE22C00B16800739AB7 /* TagCell.xib */; };
 		3D449DE42C00B16800739AB7 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D449DE12C00B16800739AB7 /* TagCell.swift */; };
+		3D449DE72C00E81A00739AB7 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D449DE62C00E81A00739AB7 /* FavoritesViewController.swift */; };
+		3D449DEF2C010A3700739AB7 /* FavoriteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D449DEE2C010A3700739AB7 /* FavoriteCell.xib */; };
+		3D449DF02C010A3700739AB7 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D449DED2C010A3700739AB7 /* FavoriteCell.swift */; };
 		3D881B472BFCD17A00AC40EF /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D881B462BFCD17A00AC40EF /* HomeViewModel.swift */; };
 		3D88D9DD2BFAAD4F0031CE14 /* GameDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D88D9DC2BFAAD4F0031CE14 /* GameDetail.swift */; };
 		3D8B7ADC2BF8ACC300C62C07 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8B7ADB2BF8ACC300C62C07 /* Constants.swift */; };
@@ -71,6 +74,9 @@
 		3D449DDD2C00621700739AB7 /* PublisherCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PublisherCell.xib; sourceTree = "<group>"; };
 		3D449DE12C00B16800739AB7 /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
 		3D449DE22C00B16800739AB7 /* TagCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagCell.xib; sourceTree = "<group>"; };
+		3D449DE62C00E81A00739AB7 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		3D449DED2C010A3700739AB7 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
+		3D449DEE2C010A3700739AB7 /* FavoriteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoriteCell.xib; sourceTree = "<group>"; };
 		3D881B462BFCD17A00AC40EF /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		3D88D9DC2BFAAD4F0031CE14 /* GameDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetail.swift; sourceTree = "<group>"; };
 		3D8B7ADB2BF8ACC300C62C07 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -200,6 +206,23 @@
 			path = TagCell;
 			sourceTree = "<group>";
 		};
+		3D449DE52C00E74B00739AB7 /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				3D449DE62C00E81A00739AB7 /* FavoritesViewController.swift */,
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
+		3D449DE82C00E90C00739AB7 /* FavoriteCell */ = {
+			isa = PBXGroup;
+			children = (
+				3D449DED2C010A3700739AB7 /* FavoriteCell.swift */,
+				3D449DEE2C010A3700739AB7 /* FavoriteCell.xib */,
+			);
+			path = FavoriteCell;
+			sourceTree = "<group>";
+		};
 		3D8B7AD62BF8A0CC00C62C07 /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,6 +278,7 @@
 			children = (
 				3D8B7AEC2BF8C11D00C62C07 /* Home */,
 				3D238C9F2BFB64FF00DEC874 /* Detail */,
+				3D449DE52C00E74B00739AB7 /* Favorites */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -281,6 +305,7 @@
 		3D8B7AEE2BF8C21B00C62C07 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				3D449DE82C00E90C00739AB7 /* FavoriteCell */,
 				3D449DE02C00B10800739AB7 /* TagCell */,
 				3D449DDB2C0061CA00739AB7 /* PublisherCell */,
 				3D449DD32C002F5B00739AB7 /* PlatformCell */,
@@ -389,6 +414,7 @@
 				3D449DD22C0021CC00739AB7 /* ScreenShotCell.xib in Resources */,
 				3D3EDCE72BF9661600C864D6 /* GameCell.xib in Resources */,
 				3D35FC682BF82A1E00B05434 /* Base in Resources */,
+				3D449DEF2C010A3700739AB7 /* FavoriteCell.xib in Resources */,
 				3D35FC602BF82A1D00B05434 /* Base in Resources */,
 				3D15247F2BFFE2B10053D0DD /* SkillCustomView.xib in Resources */,
 				3D449DD72C002F8700739AB7 /* PlatformCell.xib in Resources */,
@@ -407,6 +433,7 @@
 			files = (
 				3DF04C462BFB96C400649D02 /* UICollectionView.swift in Sources */,
 				3D238CA12BFB653300DEC874 /* DetailViewController.swift in Sources */,
+				3D449DF02C010A3700739AB7 /* FavoriteCell.swift in Sources */,
 				3D8B7ADC2BF8ACC300C62C07 /* Constants.swift in Sources */,
 				3D881B472BFCD17A00AC40EF /* HomeViewModel.swift in Sources */,
 				3D8B7ADF2BF8ACE500C62C07 /* Game.swift in Sources */,
@@ -415,6 +442,7 @@
 				3D15247A2BFFE26E0053D0DD /* InformationCustomView.swift in Sources */,
 				3D3EDCE62BF9661600C864D6 /* GameCell.swift in Sources */,
 				3D88D9DD2BFAAD4F0031CE14 /* GameDetail.swift in Sources */,
+				3D449DE72C00E81A00739AB7 /* FavoritesViewController.swift in Sources */,
 				3DA633922BFD64F100B520EB /* CustomTabBar.swift in Sources */,
 				3D35FC5D2BF82A1D00B05434 /* HomeViewController.swift in Sources */,
 				3D8B7AE52BF8B04900C62C07 /* Router.swift in Sources */,

@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import CoreData
 
 class DetailViewController: UIViewController {
   // MARK: - Properties
@@ -20,7 +21,8 @@ class DetailViewController: UIViewController {
   @IBOutlet weak var categoryName: UILabel!
   @IBOutlet weak var backButtonImage: UIImageView!
   @IBOutlet weak var segmentedControl: UISegmentedControl!
-
+  @IBOutlet weak var favoritesButton: UIButton!
+  
 // MARK: - Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -32,6 +34,7 @@ class DetailViewController: UIViewController {
     configureSelectedInfo()
     updateView()
     gameImage.layer.cornerRadius = 10
+    favoritesButton.layer.cornerRadius = 23
     trailerButton.layer.cornerRadius = 20
 
     let tapGesture = UITapGestureRecognizer(target: self, action: #selector(backButtonImageTapped))
@@ -83,8 +86,41 @@ class DetailViewController: UIViewController {
     }
   }
 
+  private func saveToFavorites(_ game: GameDetail) {
+    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+    let context = appDelegate.persistentContainer.viewContext
+
+    let favoriteGame = GameEntity(context: context)
+    favoriteGame.id = Int64(game.id ?? 0)
+    favoriteGame.name = game.name
+    favoriteGame.released = game.released
+    favoriteGame.backgroundImageURL = game.backgroundImage
+    favoriteGame.rating = game.rating ?? 0
+
+    do {
+      try context.save()
+      print("Game saved")
+    } catch {
+      print(error.localizedDescription)
+    }
+  }
+
   // MARK: - Actions
   @IBAction func trailerButtonTapped(_ sender: UIButton) {
+  }
+
+  @IBAction func favoritesButtonTapped(_ sender: Any) {
+    guard let game = selectedGame else { return }
+
+    let alert = UIAlertController(title: "Add to favorites", message: "Do you want to add this game to your favorites?", preferredStyle: .alert)
+    let addAction = UIAlertAction(title: "Add", style: .default) { _ in
+      self.saveToFavorites(game)
+    }
+    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+    alert.addAction(addAction)
+    alert.addAction(cancelAction)
+
+    present(alert, animated: true, completion: nil)
   }
 
   @IBAction func segmentedControlChanged(_ sender: UISegmentedControl) {

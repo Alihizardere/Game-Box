@@ -75,7 +75,6 @@ extension HomeViewModel: HomeViewModelProtocol {
     delegate?.updateBackgroundImage(page: currentPage)
   }
 
-
   var numberOfItems: Int {
     return isFiltering ? filteredGameList.count : gameList.count
   }
