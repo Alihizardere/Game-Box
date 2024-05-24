@@ -21,7 +21,10 @@ struct GameDetail: Decodable {
     let rating: Double?
     let ratingTop: Int?
     let reactions: [String: Int]?
+    let publishers: [Developer]?
+    let tags: [Tag]?
     let added: Int?
+    let platforms: [PlatformInfo]?
     let playtime, screenshotsCount, moviesCount, creatorsCount: Int?
     let achievementsCount, parentAchievementsCount: Int?
     let redditURL: String?
@@ -48,7 +51,7 @@ struct GameDetail: Decodable {
         case website, rating
         case ratingTop = "rating_top"
         case reactions, added
-        case playtime
+        case playtime, platforms, publishers, tags
         case genres
         case screenshotsCount = "screenshots_count"
         case moviesCount = "movies_count"
@@ -89,15 +92,34 @@ struct Genre: Decodable {
   }
 }
 
+// MARK: - PlatformElement
+struct PlatformInfo: Decodable {
+    let platform: PlatformDetail?
+}
+
+// MARK: - PlatformPlatform
+struct PlatformDetail: Decodable {
+    let name: String?
+}
+
+// MARK: - Developer
+struct Developer: Decodable {
+    let name: String?
+}
+
+struct Tag: Decodable {
+  let name: String?
+}
+
 // MARK: - MetacriticPlatform
 struct MetacriticPlatform: Decodable {
     let metascore: Int?
     let url: String?
-    let platform: MetacriticPlatformPlatform?
+    let platform: MetacriticPlatformDetail?
 }
 
-// MARK: - MetacriticPlatformPlatform
-struct MetacriticPlatformPlatform: Decodable {
+// MARK: - MetacriticPlatformDetail
+struct MetacriticPlatformDetail: Decodable {
     let platform: Int?
     let name, slug: String?
 }

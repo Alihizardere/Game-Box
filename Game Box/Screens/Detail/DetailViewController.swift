@@ -41,7 +41,7 @@ class DetailViewController: UIViewController {
 
   private func configureSelectedInfo(){
     guard let game = selectedGame else { return }
-    print(game.backgroundImage ?? "sss")
+    print(game.backgroundImage ?? "")
     if let url = URL(string: game.backgroundImage ?? "") {
       backgroundImage.kf.setImage(with: url)
       gameImage.kf.setImage(with: url)
@@ -66,12 +66,21 @@ class DetailViewController: UIViewController {
     contentView.subviews.forEach { $0.removeFromSuperview() }
     let infoView = InformationCustomView(frame: contentView.bounds)
     contentView.addSubview(infoView)
+
+    if let game = selectedGame {
+      let description = game.descriptionRaw ?? "No description available"
+      infoView.configure(with: description)
+    }
   }
 
   private func showSkillsView() {
     contentView.subviews.forEach { $0.removeFromSuperview() }
     let skillsView = SkillCustomView(frame: contentView.bounds)
     contentView.addSubview(skillsView)
+
+    if let game = selectedGame {
+      skillsView.configure(gameDetail: game)
+    }
   }
 
   // MARK: - Actions

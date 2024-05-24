@@ -22,6 +22,14 @@
 		3D35FC682BF82A1E00B05434 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 3D35FC672BF82A1E00B05434 /* Base */; };
 		3D3EDCE62BF9661600C864D6 /* GameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3EDCE42BF9661600C864D6 /* GameCell.swift */; };
 		3D3EDCE72BF9661600C864D6 /* GameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D3EDCE52BF9661600C864D6 /* GameCell.xib */; };
+		3D449DD12C0021CC00739AB7 /* ScreenShotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D449DCF2C0021CC00739AB7 /* ScreenShotCell.swift */; };
+		3D449DD22C0021CC00739AB7 /* ScreenShotCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D449DD02C0021CC00739AB7 /* ScreenShotCell.xib */; };
+		3D449DD62C002F8700739AB7 /* PlatformCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D449DD42C002F8700739AB7 /* PlatformCell.swift */; };
+		3D449DD72C002F8700739AB7 /* PlatformCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D449DD52C002F8700739AB7 /* PlatformCell.xib */; };
+		3D449DDE2C00621700739AB7 /* PublisherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D449DDC2C00621700739AB7 /* PublisherCell.swift */; };
+		3D449DDF2C00621700739AB7 /* PublisherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D449DDD2C00621700739AB7 /* PublisherCell.xib */; };
+		3D449DE32C00B16800739AB7 /* TagCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D449DE22C00B16800739AB7 /* TagCell.xib */; };
+		3D449DE42C00B16800739AB7 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D449DE12C00B16800739AB7 /* TagCell.swift */; };
 		3D881B472BFCD17A00AC40EF /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D881B462BFCD17A00AC40EF /* HomeViewModel.swift */; };
 		3D88D9DD2BFAAD4F0031CE14 /* GameDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D88D9DC2BFAAD4F0031CE14 /* GameDetail.swift */; };
 		3D8B7ADC2BF8ACC300C62C07 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8B7ADB2BF8ACC300C62C07 /* Constants.swift */; };
@@ -55,6 +63,14 @@
 		3D35FC692BF82A1E00B05434 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3D3EDCE42BF9661600C864D6 /* GameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCell.swift; sourceTree = "<group>"; };
 		3D3EDCE52BF9661600C864D6 /* GameCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameCell.xib; sourceTree = "<group>"; };
+		3D449DCF2C0021CC00739AB7 /* ScreenShotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenShotCell.swift; sourceTree = "<group>"; };
+		3D449DD02C0021CC00739AB7 /* ScreenShotCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScreenShotCell.xib; sourceTree = "<group>"; };
+		3D449DD42C002F8700739AB7 /* PlatformCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformCell.swift; sourceTree = "<group>"; };
+		3D449DD52C002F8700739AB7 /* PlatformCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlatformCell.xib; sourceTree = "<group>"; };
+		3D449DDC2C00621700739AB7 /* PublisherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherCell.swift; sourceTree = "<group>"; };
+		3D449DDD2C00621700739AB7 /* PublisherCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PublisherCell.xib; sourceTree = "<group>"; };
+		3D449DE12C00B16800739AB7 /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
+		3D449DE22C00B16800739AB7 /* TagCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagCell.xib; sourceTree = "<group>"; };
 		3D881B462BFCD17A00AC40EF /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		3D88D9DC2BFAAD4F0031CE14 /* GameDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetail.swift; sourceTree = "<group>"; };
 		3D8B7ADB2BF8ACC300C62C07 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -99,6 +115,15 @@
 				3D15247E2BFFE2B10053D0DD /* SkillCustomView.xib */,
 			);
 			path = SkillCustomView;
+			sourceTree = "<group>";
+		};
+		3D1524802C0003750053D0DD /* ScreenShotCell */ = {
+			isa = PBXGroup;
+			children = (
+				3D449DCF2C0021CC00739AB7 /* ScreenShotCell.swift */,
+				3D449DD02C0021CC00739AB7 /* ScreenShotCell.xib */,
+			);
+			path = ScreenShotCell;
 			sourceTree = "<group>";
 		};
 		3D238C9F2BFB64FF00DEC874 /* Detail */ = {
@@ -146,6 +171,33 @@
 				3D3EDCE52BF9661600C864D6 /* GameCell.xib */,
 			);
 			path = GameCell;
+			sourceTree = "<group>";
+		};
+		3D449DD32C002F5B00739AB7 /* PlatformCell */ = {
+			isa = PBXGroup;
+			children = (
+				3D449DD42C002F8700739AB7 /* PlatformCell.swift */,
+				3D449DD52C002F8700739AB7 /* PlatformCell.xib */,
+			);
+			path = PlatformCell;
+			sourceTree = "<group>";
+		};
+		3D449DDB2C0061CA00739AB7 /* PublisherCell */ = {
+			isa = PBXGroup;
+			children = (
+				3D449DDC2C00621700739AB7 /* PublisherCell.swift */,
+				3D449DDD2C00621700739AB7 /* PublisherCell.xib */,
+			);
+			path = PublisherCell;
+			sourceTree = "<group>";
+		};
+		3D449DE02C00B10800739AB7 /* TagCell */ = {
+			isa = PBXGroup;
+			children = (
+				3D449DE12C00B16800739AB7 /* TagCell.swift */,
+				3D449DE22C00B16800739AB7 /* TagCell.xib */,
+			);
+			path = TagCell;
 			sourceTree = "<group>";
 		};
 		3D8B7AD62BF8A0CC00C62C07 /* App */ = {
@@ -229,6 +281,10 @@
 		3D8B7AEE2BF8C21B00C62C07 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				3D449DE02C00B10800739AB7 /* TagCell */,
+				3D449DDB2C0061CA00739AB7 /* PublisherCell */,
+				3D449DD32C002F5B00739AB7 /* PlatformCell */,
+				3D1524802C0003750053D0DD /* ScreenShotCell */,
 				3D8B7AF02BF8C60600C62C07 /* SlideCell */,
 				3D3EDCE32BF965D600C864D6 /* GameCell */,
 			);
@@ -328,12 +384,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D449DE32C00B16800739AB7 /* TagCell.xib in Resources */,
 				3D35FC652BF82A1E00B05434 /* Assets.xcassets in Resources */,
+				3D449DD22C0021CC00739AB7 /* ScreenShotCell.xib in Resources */,
 				3D3EDCE72BF9661600C864D6 /* GameCell.xib in Resources */,
 				3D35FC682BF82A1E00B05434 /* Base in Resources */,
 				3D35FC602BF82A1D00B05434 /* Base in Resources */,
 				3D15247F2BFFE2B10053D0DD /* SkillCustomView.xib in Resources */,
+				3D449DD72C002F8700739AB7 /* PlatformCell.xib in Resources */,
 				3D1524782BFFE25F0053D0DD /* InformationCustomView.xib in Resources */,
+				3D449DDF2C00621700739AB7 /* PublisherCell.xib in Resources */,
 				3D8B7AF32BF8C66C00C62C07 /* SlideCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -350,6 +410,7 @@
 				3D8B7ADC2BF8ACC300C62C07 /* Constants.swift in Sources */,
 				3D881B472BFCD17A00AC40EF /* HomeViewModel.swift in Sources */,
 				3D8B7ADF2BF8ACE500C62C07 /* Game.swift in Sources */,
+				3D449DD62C002F8700739AB7 /* PlatformCell.swift in Sources */,
 				3D8B7AE32BF8B03200C62C07 /* Webservice.swift in Sources */,
 				3D15247A2BFFE26E0053D0DD /* InformationCustomView.swift in Sources */,
 				3D3EDCE62BF9661600C864D6 /* GameCell.swift in Sources */,
@@ -358,11 +419,14 @@
 				3D35FC5D2BF82A1D00B05434 /* HomeViewController.swift in Sources */,
 				3D8B7AE52BF8B04900C62C07 /* Router.swift in Sources */,
 				3DF04C442BFB961800649D02 /* UICollectionViewCell.swift in Sources */,
+				3D449DD12C0021CC00739AB7 /* ScreenShotCell.swift in Sources */,
 				3D35FC592BF82A1D00B05434 /* AppDelegate.swift in Sources */,
+				3D449DE42C00B16800739AB7 /* TagCell.swift in Sources */,
 				3D35FC5B2BF82A1D00B05434 /* SceneDelegate.swift in Sources */,
 				3D8B7AF42BF8C66C00C62C07 /* SlideCell.swift in Sources */,
 				3D35FC632BF82A1D00B05434 /* Game_Box.xcdatamodeld in Sources */,
 				3D15247D2BFFE2A80053D0DD /* SkillCustomView.swift in Sources */,
+				3D449DDE2C00621700739AB7 /* PublisherCell.swift in Sources */,
 				3D8B7AE12BF8B02500C62C07 /* GameLogic.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
