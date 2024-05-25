@@ -12,59 +12,36 @@ class FavoritesViewController: UIViewController {
 
   // MARK: - Properties
   @IBOutlet weak var favoriteTableView: UITableView!
-  var favoriteGames = [GameEntity]()
+  var viewModel: FavoriteViewModelProtocol! {
+    didSet { viewModel.delegate = self }
+  }
 
   // MARK: - Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
     navigationController?.navigationBar.isHidden = false
-
+    viewModel = FavoritesViewModel()
     favoriteTableView.delegate = self
     favoriteTableView.dataSource = self
     favoriteTableView.register(UINib(nibName: FavoriteCell.identifier, bundle: nil), forCellReuseIdentifier: FavoriteCell.identifier)
   }
 
   override func viewWillAppear(_ animated: Bool) {
-    fetchFavoriteGames()
-  }
-
-  //  MARK: - Functions
-  private func fetchFavoriteGames() {
-    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-    let context = appDelegate.persistentContainer.viewContext
-    let fetchRequest = GameEntity.fetchRequest()
-
-    do {
-      favoriteGames = try context.fetch(fetchRequest)
-      favoriteTableView.reloadData()
-    } catch {
-      print(error.localizedDescription)
-    }
-  }
-
-  private func deleteGame(_ game: GameEntity) {
-    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-    let context = appDelegate.persistentContainer.viewContext
-    context.delete(game)
-
-    do {
-      try context.save()
-    } catch {
-      print(error.localizedDescription)
-    }
+    viewModel.load()
   }
 }
 
 // MARK: - TableView Delegates
 extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    favoriteGames.count
+    viewModel.numberOfItems
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteCell.identifier) as! FavoriteCell
-    let game = favoriteGames[indexPath.row]
-    cell.configure(game: game)
+    if let game = viewModel.game(index: indexPath) {
+      cell.configure(game: game)
+    }
     return cell
   }
 
@@ -73,23 +50,49 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+
     let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
 
-      let game = self.favoriteGames[indexPath.row]
-      let alertController = UIAlertController(title: "Delete Game", message: "Are you sure you want to delete this game?", preferredStyle: .alert)
-
-      let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-      let OkButton = UIAlertAction(title: "Delete", style: .destructive) { _ in
-        self.deleteGame(game)
-        self.favoriteGames.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .automatic)
-      }
-
-      alertController.addAction(cancelButton)
-      alertController.addAction(OkButton)
-      self.present(alertController, animated: true, completion: nil)
+      let game = self.viewModel.game(index: indexPath)
+      UIAlertController.showAlert(
+        on: self ,
+        title: "Delete Game",
+        message: "Are you sure you want to delete this game?",
+        primaryButtonTitle: "OK",
+        primaryButtonStyle: .destructive,
+        primaryButtonHandler: {
+          self.viewModel.delete(index: indexPath)
+        },
+        secondaryButtonTitle: "Cancel")
     }
     return UISwipeActionsConfiguration(actions: [deleteAction])
   }
 }
 
+// MARK: - FavoriteViewModelDelegate
+extension FavoritesViewController: FavoriteViewModelDelegate {
+  
+  func reloadData() {
+    favoriteTableView.reloadData()
+  }
+
+  func configureCoreData() -> NSManagedObjectContext? {
+    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+      return nil
+    }
+    return appDelegate.persistentContainer.viewContext
+  }
+
+  func showEmptyView() {
+    let emptyView = EmptyView(frame: CGRect(x: 0, y: 200, width: view.frame.width , height: view.frame.height / 2))
+    view.addSubview(emptyView)
+  }
+
+  func hideEmptyView() {
+    for subview in view.subviews {
+      if let emptyView = subview as? EmptyView {
+        emptyView.removeFromSuperview()
+      }
+    }
+  }
+}

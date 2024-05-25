@@ -12,18 +12,19 @@ enum Router: URLRequestConvertible {
 
   case allGames
   case gameDetail(id: Int)
+  case gameTrailer(id: Int)
 
   // MARK: - method
   var method: HTTPMethod {
     switch self {
-    case .allGames, .gameDetail:
+    case .allGames, .gameDetail, .gameTrailer :
       return  .get
     }
   }
   // MARK: - Parameters
   var parameters: [String: Any]? {
     switch self {
-    case .allGames, .gameDetail:
+    case .allGames, .gameDetail, .gameTrailer:
         return nil
     }
   }
@@ -39,6 +40,9 @@ enum Router: URLRequestConvertible {
       return url!
     case .gameDetail(let id):
       let url = URL(string: Constants.baseURL+"/\(id)"+Constants.apiKey)
+      return url!
+    case .gameTrailer(let id):
+      let url = URL(string: Constants.baseURL+"/\(id)/movies"+Constants.apiKey)
       return url!
     }
   }

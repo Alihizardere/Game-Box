@@ -1,11 +1,11 @@
 {
   "images" : [
     {
+      "filename" : "pegi7.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "s.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

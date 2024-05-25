@@ -12,11 +12,14 @@ protocol HomeViewModelDelegate: AnyObject {
   func navigateToDetail(with gameDetail: GameDetail)
   func updatePageControl(currentPage: Int)
   func updateBackgroundImage(page : Int)
+  func showEmptyView()
+  func hideEmptyView()
 }
 
 protocol HomeViewModelProtocol {
   var delegate: HomeViewModelDelegate? { get set }
   var numberOfItems: Int { get }
+  var sliderGames: [Game] { get }
   func load()
   func game(index: IndexPath) -> Game?
   func fetchDetail(gameId: Int)
@@ -32,6 +35,7 @@ final class HomeViewModel {
   // MARK: - Properties
   var gameList = [Game]()
   var filteredGameList = [Game]()
+  var sliderGames = [Game]()
   weak var delegate: HomeViewModelDelegate?
   var isFiltering: Bool = false
   private var timer: Timer?
@@ -45,6 +49,7 @@ final class HomeViewModel {
       case .success(let gameResponse):
         if let games = gameResponse.results {
           gameList = games
+          self.sliderGames = Array(games.prefix(3))
         }
         DispatchQueue.main.async {
           self.delegate?.reloadData()
@@ -67,7 +72,7 @@ final class HomeViewModel {
   }
 }
 
-// MARK: - HomeViewModelProtocol
+// MARK: - HomeViewModelProtocols
 extension HomeViewModel: HomeViewModelProtocol {
   func updateCurrentPage(to page: Int) {
     currentPage = page
@@ -91,18 +96,31 @@ extension HomeViewModel: HomeViewModelProtocol {
     if searchText.count < 3 {
       isFiltering = false
       filteredGameList = []
+      delegate?.hideEmptyView()
     } else {
       isFiltering = true
       filteredGameList = gameList.filter {
         guard let name = $0.name else { return false }
         return name.lowercased().contains(searchText.lowercased())
       }
+      if filteredGameList.isEmpty {
+        delegate?.showEmptyView()
+      } else {
+        delegate?.hideEmptyView()
+        delegate?.reloadData()
+      }
     }
     self.delegate?.reloadData()
   }
 
   func startTimer() {
-    timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(autoScroll), userInfo: nil, repeats: true)
+    timer = Timer.scheduledTimer(
+      timeInterval: 3,
+      target: self,
+      selector: #selector(autoScroll),
+      userInfo: nil,
+      repeats: true
+    )
   }
 
   func stopTimer() {
@@ -111,7 +129,7 @@ extension HomeViewModel: HomeViewModelProtocol {
   }
 
   @objc func autoScroll() {
-    currentPage = currentPage < Constants.slides.count - 1 ? currentPage + 1 : 0
+    currentPage = currentPage < sliderGames.count - 1 ? currentPage + 1 : 0
     delegate?.updatePageControl(currentPage: currentPage)
     delegate?.updateBackgroundImage(page: currentPage)
   }

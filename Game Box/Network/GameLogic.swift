@@ -10,6 +10,7 @@ import Foundation
 protocol GameLogicProtocol {
   func getAllGames(completionHandler: @escaping (Result<GameResponse, Error>) -> Void)
   func getDetailGame(gameId: Int ,completionHandler: @escaping (Result<GameDetail, Error>) -> Void)
+  func getGameTrailer(gameId: Int ,completionHandler: @escaping (Result<GameTrailerResponse, Error>) -> Void)
 }
 
 final class GameLogic: GameLogicProtocol {
@@ -33,6 +34,14 @@ final class GameLogic: GameLogicProtocol {
     Webservice.shared.request(
       request: Router.gameDetail(id: gameId),
       decodeType: GameDetail.self,
+      completionHandler: completionHandler
+    )
+  }
+
+  func getGameTrailer(gameId: Int, completionHandler: @escaping (Result<GameTrailerResponse, any Error>) -> Void) {
+    Webservice.shared.request(
+      request: Router.gameTrailer(id: gameId),
+      decodeType: GameTrailerResponse.self,
       completionHandler: completionHandler
     )
   }

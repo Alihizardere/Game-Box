@@ -15,6 +15,8 @@ class HomeViewController: UIViewController {
   @IBOutlet weak var searchBar: UISearchBar!
   @IBOutlet weak var pageControl: UIPageControl!
   @IBOutlet weak var backgroundImage: UIImageView!
+  @IBOutlet weak var gameCollectionViewTopConstraint: NSLayoutConstraint!
+
   var viewModel: HomeViewModelProtocol! {
     didSet { viewModel.delegate = self }
   }
@@ -68,6 +70,17 @@ class HomeViewController: UIViewController {
     gameCollectionView.dataSource = self
     gameCollectionView.register(cellType: GameCell.self)
   }
+
+  private func updateGameCollectionViewTopConstraint(isActive: Bool) {
+    if isActive {
+      gameCollectionViewTopConstraint.constant = -240
+    } else {
+      gameCollectionViewTopConstraint.constant = 0
+    }
+    UIView.animate(withDuration: 0.3) {
+      self.view.layoutIfNeeded()
+    }
+  }
 }
 
 // MARK: - CollectionView Delegates
@@ -76,7 +89,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     switch collectionView {
     case sliderCollectionView:
-      return Constants.slides.count
+      return viewModel.sliderGames.count
     case gameCollectionView:
       return viewModel.numberOfItems
     default:
@@ -89,8 +102,10 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
     case sliderCollectionView:
       let cell = collectionView.dequeCell(cellType: SlideCell.self, indexPath: indexPath)
-      let item = Constants.slides[indexPath.row]
-      cell.slideImageView.image = item
+      let item = viewModel.sliderGames[indexPath.row]
+      if let url = URL(string: item.backgroundImage ?? "") {
+        cell.slideImageView.kf.setImage(with: url)
+      }
       return cell
     case gameCollectionView:
       let cell = collectionView.dequeCell(cellType: GameCell.self, indexPath: indexPath)
@@ -126,16 +141,31 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 // MARK: - SearchBar Delegates
 extension HomeViewController: UISearchBarDelegate {
+  func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+    updateGameCollectionViewTopConstraint(isActive: true)
+  }
+
+  func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+    updateGameCollectionViewTopConstraint(isActive: false)
+  }
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
     viewModel.filterGames(with: searchText)
+  }
+
+  func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+    searchBar.text = ""
+    searchBar.resignFirstResponder()
+    updateGameCollectionViewTopConstraint(isActive: false)
+    viewModel.filterGames(with: "")
   }
 }
 
 // MARK: - HomeViewModelDelegate
 extension HomeViewController:  HomeViewModelDelegate {
-
+  
   func reloadData() {
     gameCollectionView.reloadData()
+    sliderCollectionView.reloadData()
   }
 
   func navigateToDetail(with gameDetail: GameDetail) {
@@ -143,7 +173,9 @@ extension HomeViewController:  HomeViewModelDelegate {
   }
 
   func updateBackgroundImage(page: Int) {
-    backgroundImage.image = Constants.slides[page]
+    if let url = URL(string: viewModel.sliderGames[page].backgroundImage ?? "") {
+      backgroundImage.kf.setImage(with: url)
+    }
   }
 
   func updatePageControl(currentPage: Int) {
@@ -151,6 +183,19 @@ extension HomeViewController:  HomeViewModelDelegate {
     let indexPath = IndexPath(item: currentPage, section: 0)
     sliderCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     updateBackgroundImage(page: currentPage)
+  }
+
+  func showEmptyView() {
+    let emptyView = EmptyView(frame: CGRect(x: 0, y: 200, width: view.frame.width , height: view.frame.height / 2))
+    view.addSubview(emptyView)
+  }
+
+  func hideEmptyView() {
+    for subview in view.subviews {
+      if let emptyView = subview as? EmptyView {
+        emptyView.removeFromSuperview()
+      }
+    }
   }
 }
 

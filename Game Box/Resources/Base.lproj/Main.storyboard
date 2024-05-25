@@ -41,16 +41,16 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1xa-O1-GlJ">
-                                <rect key="frame" x="0.0" y="190.33333333333337" width="393" height="230"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="slide1" translatesAutoresizingMaskIntoConstraints="NO" id="1xa-O1-GlJ">
+                                <rect key="frame" x="0.0" y="190.33333333333337" width="393" height="240"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="230" id="8Lq-Af-e0Z"/>
+                                    <constraint firstAttribute="height" constant="240" id="8Lq-Af-e0Z"/>
                                 </constraints>
                             </imageView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UaS-ze-XtW">
-                                <rect key="frame" x="0.0" y="190.33333333333337" width="393" height="230"/>
+                                <rect key="frame" x="0.0" y="190.33333333333337" width="393" height="240"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="duu-b0-Ha9">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="230"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="240"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nxR-XX-EXk">
@@ -68,7 +68,7 @@
                                             <cells/>
                                         </collectionView>
                                         <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="KvP-Yh-Kzt">
-                                            <rect key="frame" x="139" y="207.99999999999997" width="115.66666666666669" height="25.666666666666657"/>
+                                            <rect key="frame" x="139" y="211.99999999999997" width="115.66666666666669" height="25.666666666666657"/>
                                             <color key="pageIndicatorTintColor" systemColor="systemGray5Color"/>
                                             <color key="currentPageIndicatorTintColor" systemColor="systemGreenColor"/>
                                         </pageControl>
@@ -78,7 +78,7 @@
                                         <constraint firstItem="nxR-XX-EXk" firstAttribute="top" secondItem="duu-b0-Ha9" secondAttribute="top" constant="8" id="CJP-kt-wKX"/>
                                         <constraint firstAttribute="trailing" secondItem="nxR-XX-EXk" secondAttribute="trailing" constant="8" id="E4C-yr-guZ"/>
                                         <constraint firstItem="nxR-XX-EXk" firstAttribute="leading" secondItem="duu-b0-Ha9" secondAttribute="leading" constant="8" id="cf4-T2-b3b"/>
-                                        <constraint firstItem="KvP-Yh-Kzt" firstAttribute="top" secondItem="nxR-XX-EXk" secondAttribute="bottom" id="iCQ-Mx-Fuz"/>
+                                        <constraint firstItem="KvP-Yh-Kzt" firstAttribute="top" secondItem="nxR-XX-EXk" secondAttribute="bottom" constant="4" id="iCQ-Mx-Fuz"/>
                                     </constraints>
                                 </view>
                                 <blurEffect style="dark"/>
@@ -86,7 +86,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="keyPath" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </visualEffectView>
-                            <searchBar contentMode="redraw" placeholder="Arama" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flo-52-oig">
+                            <searchBar contentMode="redraw" placeholder="Arama" showsCancelButton="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flo-52-oig">
                                 <rect key="frame" x="0.0" y="135" width="393" height="55.333333333333343"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" systemColor="systemGreenColor"/>
@@ -97,8 +97,8 @@
                                 </connections>
                             </searchBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Uka-q1-iXv">
-                                <rect key="frame" x="0.0" y="420.33333333333326" width="393" height="431.66666666666674"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="0.0" y="430.33333333333326" width="393" height="421.66666666666674"/>
+                                <color key="backgroundColor" name="backgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Ir9-FK-mly">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -136,6 +136,7 @@
                     <connections>
                         <outlet property="backgroundImage" destination="1xa-O1-GlJ" id="cpZ-KM-Hht"/>
                         <outlet property="gameCollectionView" destination="Uka-q1-iXv" id="F1R-2h-Pm3"/>
+                        <outlet property="gameCollectionViewTopConstraint" destination="d8b-kS-pG6" id="n2n-0R-cOe"/>
                         <outlet property="pageControl" destination="KvP-Yh-Kzt" id="kWh-f4-8Eg"/>
                         <outlet property="searchBar" destination="flo-52-oig" id="olr-hH-j1H"/>
                         <outlet property="sliderCollectionView" destination="nxR-XX-EXk" id="DG8-fv-G5P"/>
@@ -176,11 +177,11 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bp1-KL-OlX">
                                 <rect key="frame" x="0.0" y="139" width="393" height="630"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" name="backgroundColor"/>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="SMc-hY-Odn"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="backgroundColor"/>
                         <constraints>
                             <constraint firstItem="SMc-hY-Odn" firstAttribute="trailing" secondItem="bp1-KL-OlX" secondAttribute="trailing" id="3F4-1S-ad8"/>
                             <constraint firstItem="bp1-KL-OlX" firstAttribute="top" secondItem="SMc-hY-Odn" secondAttribute="top" constant="80" id="Dbp-dT-uND"/>
@@ -270,6 +271,9 @@
                                                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <state key="normal" title="Button"/>
                                                                     <buttonConfiguration key="configuration" style="plain" title="FRAGMANI İZLE"/>
+                                                                    <connections>
+                                                                        <action selector="trailerButtonTapped:" destination="P4l-Ny-TNo" eventType="touchUpInside" id="t1Q-PO-Wn2"/>
+                                                                    </connections>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zsc-S6-FEz">
                                                                     <rect key="frame" x="315" y="0.0" width="46" height="46"/>
@@ -406,6 +410,8 @@
                     <navigationItem key="navigationItem" id="5KD-0X-NG2"/>
                     <size key="freeformSize" width="393" height="1050"/>
                     <connections>
+                        <outlet property="ageImage" destination="R0W-ps-eTc" id="PXF-Gw-KGS"/>
+                        <outlet property="ageLabel" destination="DNN-KU-wMj" id="Isk-qh-5n8"/>
                         <outlet property="backButtonImage" destination="3hN-uX-FXQ" id="A8I-7v-hHV"/>
                         <outlet property="backgroundImage" destination="hrH-S5-gBs" id="dl5-Tk-pTG"/>
                         <outlet property="categoryName" destination="LnN-eH-W83" id="Skl-9D-BqM"/>
@@ -420,7 +426,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FX3-Kt-dTV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2855.7251908396947" y="14.788732394366198"/>
+            <point key="canvasLocation" x="2804" y="-27"/>
         </scene>
     </scenes>
     <resources>
@@ -429,6 +435,7 @@
         <image name="house.fill" catalog="system" width="128" height="104"/>
         <image name="logo" width="16" height="16"/>
         <image name="pegi12" width="295" height="360"/>
+        <image name="slide1" width="640" height="360"/>
         <image name="star" catalog="system" width="128" height="116"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <namedColor name="backgroundColor">
@@ -447,10 +454,10 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

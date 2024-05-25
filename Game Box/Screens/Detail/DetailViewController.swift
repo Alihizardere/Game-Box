@@ -8,6 +8,7 @@
 import UIKit
 import Kingfisher
 import CoreData
+import AVKit
 
 class DetailViewController: UIViewController {
   // MARK: - Properties
@@ -22,6 +23,8 @@ class DetailViewController: UIViewController {
   @IBOutlet weak var backButtonImage: UIImageView!
   @IBOutlet weak var segmentedControl: UISegmentedControl!
   @IBOutlet weak var favoritesButton: UIButton!
+  @IBOutlet weak var ageImage: UIImageView!
+  @IBOutlet weak var ageLabel: UILabel!
   
 // MARK: - Lifecycle
   override func viewDidLoad() {
@@ -87,19 +90,29 @@ class DetailViewController: UIViewController {
   }
 
   private func saveToFavorites(_ game: GameDetail) {
+
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
     let context = appDelegate.persistentContainer.viewContext
-
-    let favoriteGame = GameEntity(context: context)
-    favoriteGame.id = Int64(game.id ?? 0)
-    favoriteGame.name = game.name
-    favoriteGame.released = game.released
-    favoriteGame.backgroundImageURL = game.backgroundImage
-    favoriteGame.rating = game.rating ?? 0
+    let fetchRequest = GameEntity.fetchRequest()
+    fetchRequest.predicate = NSPredicate(format: "id == %d", game.id ?? 0)
 
     do {
-      try context.save()
-      print("Game saved")
+      let results = try context.fetch(fetchRequest)
+      if results.isEmpty {
+        let favoriteGame = GameEntity(context: context)
+        favoriteGame.id = Int64(game.id ?? 0)
+        favoriteGame.name = game.name
+        favoriteGame.released = game.released
+        favoriteGame.backgroundImageURL = game.backgroundImage
+        favoriteGame.rating = game.rating ?? 0
+
+        try context.save()
+        print("Game saved")
+        UIAlertController.showAlert(on: self, title: "Success", message: "Game added to favorites.", primaryButtonTitle: "OK")
+      } else {
+        UIAlertController.showAlert(on: self, title: "Already Added", message: "This game is already in your favorites.", primaryButtonTitle: "OK")
+      }
+
     } catch {
       print(error.localizedDescription)
     }
@@ -107,20 +120,42 @@ class DetailViewController: UIViewController {
 
   // MARK: - Actions
   @IBAction func trailerButtonTapped(_ sender: UIButton) {
+    guard let gameId = selectedGame?.id else { return }
+    print(gameId)
+    GameLogic.shared.getGameTrailer(gameId: gameId) { result in
+      switch result {
+      case .success(let trailerResponse):
+        if let urlString = trailerResponse.results?.first?.data?.max, let url = URL(string: urlString) {
+          self.playTrailer(url: url)
+        } else {
+          UIAlertController.showAlert(
+            on: self,
+            title: "Info",
+            message: "The trailer for this game has not been uploaded yet.",
+            primaryButtonTitle: "OK"
+          )
+        }
+      case .failure(let error):
+        print(error.localizedDescription)
+      }
+    }
+  }
+
+  private func playTrailer(url: URL) {
+    let player = AVPlayer(url: url)
+    let playerViewController = AVPlayerViewController()
+    playerViewController.player = player
+
+    DispatchQueue.main.async {
+      self.present(playerViewController, animated: true) {
+        playerViewController.player?.play()
+      }
+    }
   }
 
   @IBAction func favoritesButtonTapped(_ sender: Any) {
     guard let game = selectedGame else { return }
-
-    let alert = UIAlertController(title: "Add to favorites", message: "Do you want to add this game to your favorites?", preferredStyle: .alert)
-    let addAction = UIAlertAction(title: "Add", style: .default) { _ in
-      self.saveToFavorites(game)
-    }
-    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-    alert.addAction(addAction)
-    alert.addAction(cancelAction)
-
-    present(alert, animated: true, completion: nil)
+    self.saveToFavorites(game)
   }
 
   @IBAction func segmentedControlChanged(_ sender: UISegmentedControl) {
