@@ -10,8 +10,7 @@ import Kingfisher
 
 class GameCell: UICollectionViewCell {
 
-  // MARK: - Properties
- 
+  // MARK: - Properties 
   @IBOutlet weak var gameImageView: UIImageView!
   @IBOutlet weak var gameName: UILabel!
   @IBOutlet weak var gameRating: UILabel!

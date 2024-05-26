@@ -11,13 +11,16 @@ class InformationCustomView: UIView {
   // MARK: - Properties
   @IBOutlet weak var screenShotCollectionView: UICollectionView!
   @IBOutlet weak var descriptionTextView: UITextView!
-  var screenShots = [String]()
+  var viewModel: DetailViewModelInfoProtocol! {
+    didSet { viewModel.delegateInfo = self }
+  }
 
   // MARK: - Lifecycle
   override init(frame: CGRect) {
     super.init(frame: frame)
     commonInit()
     setupUI()
+    viewModel = DetailViewModel()
   }
 
    required init?(coder: NSCoder) {
@@ -32,13 +35,13 @@ class InformationCustomView: UIView {
     screenShotCollectionView.collectionViewLayout = createLayout()
   }
 
-  func configure(with descripton: String) {
-    descriptionTextView.text = descripton
+  func configure(with description: String) {
+    let englishDescription = parseEnglishDescription(from: description)
+    descriptionTextView.text = englishDescription
   }
-
+  
   func fetchGameScreenShots(game: Game){
-    screenShots = game.shortScreenshots?.compactMap { $0.image } ?? []
-    screenShotCollectionView.reloadData()
+    viewModel.fetchGameScreenShots(game: game)
   }
 
   private func commonInit() {
@@ -49,6 +52,14 @@ class InformationCustomView: UIView {
      view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
      addSubview(view)
    }
+
+  private func parseEnglishDescription(from description: String) -> String {
+    if let range = description.range(of: "\n\nEspañol") {
+      return String(description[..<range.lowerBound])
+    } else {
+      return description
+    }
+  }
 
   private func createLayout() -> UICollectionViewLayout {
       let largeItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.6),
@@ -72,20 +83,26 @@ class InformationCustomView: UIView {
 
       return UICollectionViewCompositionalLayout(section: section)
     }
-
 }
 
 // MARK: - CollectionView Delegates
 extension InformationCustomView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    screenShots.count
+    viewModel.numberOfItems
   }
-  
+
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeCell(cellType: ScreenShotCell.self, indexPath: indexPath)
-    let screenShot = screenShots[indexPath.row]
+    let screenShot = viewModel.screenShot(indexPath: indexPath)
     cell.configure(screenShot: screenShot)
     return cell
+  }
+}
+
+// MARK: - DetailViewModelInfoDelegates
+extension InformationCustomView: DetailViewModelInfoDelegate {
+  func reloadData() {
+    screenShotCollectionView.reloadData()
   }
 }

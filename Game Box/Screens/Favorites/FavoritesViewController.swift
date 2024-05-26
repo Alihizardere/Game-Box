@@ -53,7 +53,6 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
 
     let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
 
-      let game = self.viewModel.game(index: indexPath)
       UIAlertController.showAlert(
         on: self ,
         title: "Delete Game",

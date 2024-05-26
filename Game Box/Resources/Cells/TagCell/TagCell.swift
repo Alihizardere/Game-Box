@@ -14,7 +14,7 @@ class TagCell: UICollectionViewCell {
   override func awakeFromNib() {
     super.awakeFromNib()
     layer.backgroundColor = UIColor.black.cgColor
-    layer.borderWidth = 1
+    layer.borderWidth = 2
     layer.borderColor = UIColor.lightGray.cgColor
     layer.cornerRadius = 10
   }

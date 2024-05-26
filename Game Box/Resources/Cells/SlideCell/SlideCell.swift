@@ -10,7 +10,6 @@ import UIKit
 class SlideCell: UICollectionViewCell {
 
   // MARK: -  Properties
- 
   @IBOutlet weak var slideImageView: UIImageView!
 
   // MARK: - Lifecycle

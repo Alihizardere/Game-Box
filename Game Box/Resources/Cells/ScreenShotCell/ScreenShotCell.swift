@@ -9,12 +9,13 @@ import UIKit
 import Kingfisher
 
 class ScreenShotCell: UICollectionViewCell {
-
+ 
   @IBOutlet weak var gameScreenShot: UIImageView!
 
   override func awakeFromNib() {
-        super.awakeFromNib()
-    }
+    super.awakeFromNib()
+    gameScreenShot.layer.cornerRadius = 10
+  }
 
   func configure(screenShot: String){
     guard let url = URL(string: screenShot) else { return }

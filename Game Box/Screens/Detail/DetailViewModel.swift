@@ -33,14 +33,27 @@ protocol DetailViewModelSkillProtocol {
   func configureCollectionView(game: GameDetail)
 }
 
+protocol DetailViewModelInfoDelegate: AnyObject {
+  func reloadData()
+}
+
+protocol DetailViewModelInfoProtocol {
+  var delegateInfo: DetailViewModelInfoDelegate? { get set}
+  var numberOfItems: Int { get }
+  func screenShot(indexPath: IndexPath) -> String
+  func fetchGameScreenShots(game: Game)
+}
+
 final class DetailViewModel {
   
   // MARK: - Properties
   weak var delegate: DetailViewModelDelegate?
   weak var delegateSkill: DetailViewModelSkillDelegate?
+  weak var delegateInfo: DetailViewModelInfoDelegate?
   var publishers = [String]()
   var platforms = [String]()
   var tags = [String]()
+  var screenShots = [String]()
 
   static let sectionPublishers = "publishers"
   static let sectionPlatforms = "platforms"
@@ -54,17 +67,18 @@ final class DetailViewModel {
 
     do {
       let results = try context.fetch(fetchRequest)
+
       if results.isEmpty {
+
         let favoriteGame = GameEntity(context: context)
         favoriteGame.id = Int64(game.id ?? 0)
         favoriteGame.name = game.name
         favoriteGame.released = game.released
         favoriteGame.backgroundImageURL = game.backgroundImage
         favoriteGame.rating = game.rating ?? 0
-
         try context.save()
-        print("Game saved")
         delegate?.showSuccessAlert()
+
       } else {
         delegate?.showAlreadyAddedAlert()
       }
@@ -101,7 +115,7 @@ func saveToGame(game: GameDetail) {
   }
 }
 
-// MARK: - DetailViewModelSkillProtocol
+// MARK: - DetailViewModelSkillProtocols
 extension DetailViewModel: DetailViewModelSkillProtocol {
 
   func numberOfItems(in section: String) -> Int {
@@ -141,3 +155,18 @@ extension DetailViewModel: DetailViewModelSkillProtocol {
   }
 }
 
+// MARK: - DetailViewModelInfoProtocols
+extension DetailViewModel: DetailViewModelInfoProtocol {
+
+  var numberOfItems: Int {
+    screenShots.count
+  }
+  func screenShot(indexPath: IndexPath) -> String {
+    screenShots[indexPath.row]
+  }
+
+  func fetchGameScreenShots(game: Game){
+    screenShots = game.shortScreenshots?.compactMap { $0.image } ?? []
+    delegateInfo?.reloadData()
+  }
+}

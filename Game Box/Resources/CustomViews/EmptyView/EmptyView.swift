@@ -27,12 +27,12 @@ class EmptyView: UIView {
   // MARK: - Functions
   private func setupView() {
     backgroundColor = .clear 
-    imageView = UIImageView(image: UIImage(named: "slide1"))
+    imageView = UIImageView(image: UIImage(named: "no-results"))
     imageView.contentMode = .scaleAspectFit
     addSubview(imageView)
 
     messageLabel = UILabel()
-    messageLabel.text = "No results"
+    messageLabel.text = "No results found"
     messageLabel.textColor = .gray
     messageLabel.font = .boldSystemFont(ofSize: 25)
     messageLabel.textAlignment = .center
@@ -42,12 +42,12 @@ class EmptyView: UIView {
     messageLabel.translatesAutoresizingMaskIntoConstraints = false
 
     NSLayoutConstraint.activate([
+      imageView.topAnchor.constraint(equalTo: topAnchor, constant: 120),
       imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-      imageView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -20),
-      imageView.widthAnchor.constraint(equalToConstant: 300),
-      imageView.heightAnchor.constraint(equalToConstant: 300),
+      imageView.widthAnchor.constraint(equalToConstant: 250),
+      imageView.heightAnchor.constraint(equalToConstant: 250),
 
-      messageLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10),
+      messageLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor),
       messageLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
       messageLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
     ])

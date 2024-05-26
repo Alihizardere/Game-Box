@@ -10,52 +10,24 @@ import Foundation
 // MARK: - GameDetail
 struct GameDetail: Decodable {
     let id: Int?
-    let slug, name, nameOriginal, description: String?
-    let metacritic: Int?
-    let metacriticPlatforms: [MetacriticPlatform]?
+    let name, description: String?
     let released: String?
-    let tba: Bool?
-    let updated: String?
-    let backgroundImage, backgroundImageAdditional: String?
-    let website: String?
+    let backgroundImage: String?
     let rating: Double?
-    let ratingTop: Int?
-    let reactions: [String: Int]?
     let publishers: [Developer]?
     let tags: [Tag]?
-    let added: Int?
     let platforms: [PlatformInfo]?
-    let playtime, screenshotsCount, moviesCount, creatorsCount: Int?
-    let achievementsCount, parentAchievementsCount: Int?
     let genres: [Genre]?
-    let suggestionsCount: Int?
-    let alternativeNames: [String]?
-    let reviewsCount: Int?
-    let stores: [Store]?
     let descriptionRaw: String?
 
     enum CodingKeys: String, CodingKey {
-        case id, slug, name
-        case nameOriginal = "name_original"
-        case description, metacritic
-        case metacriticPlatforms = "metacritic_platforms"
-        case released, tba, updated
+        case id, name
+        case description
+        case released
         case backgroundImage = "background_image"
-        case backgroundImageAdditional = "background_image_additional"
-        case website, rating
-        case ratingTop = "rating_top"
-        case reactions, added
-        case playtime, platforms, publishers, tags
+        case rating
+        case platforms, publishers, tags
         case genres
-        case screenshotsCount = "screenshots_count"
-        case moviesCount = "movies_count"
-        case creatorsCount = "creators_count"
-        case achievementsCount = "achievements_count"
-        case parentAchievementsCount = "parent_achievements_count"
-        case suggestionsCount = "suggestions_count"
-        case alternativeNames = "alternative_names"
-        case reviewsCount = "reviews_count"
-        case stores
         case descriptionRaw = "description_raw"
     }
 }
@@ -63,11 +35,11 @@ struct GameDetail: Decodable {
 // MARK: - Genre
 struct Genre: Decodable {
   let id: Int?
-  let name, slug: String?
+  let name: String?
   let imageBackground: String?
 
   enum CodingKeys: String, CodingKey {
-    case id, name, slug
+    case id, name
     case imageBackground = "image_background"
   }
 }
@@ -87,28 +59,11 @@ struct Developer: Decodable {
     let name: String?
 }
 
+// MARK: - Tag
 struct Tag: Decodable {
   let name: String?
 }
 
-// MARK: - MetacriticPlatform
-struct MetacriticPlatform: Decodable {
-    let metascore: Int?
-    let url: String?
-    let platform: MetacriticPlatformDetail?
-}
-
-// MARK: - MetacriticPlatformDetail
-struct MetacriticPlatformDetail: Decodable {
-    let platform: Int?
-    let name, slug: String?
-}
-
-// MARK: - Store
-struct Store: Decodable {
-    let id: Int?
-    let url: String?
-}
 
 
 

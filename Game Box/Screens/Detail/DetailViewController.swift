@@ -46,7 +46,7 @@ class DetailViewController: UIViewController {
     configureSelectedInfo()
     updateView()
     gameImage.layer.cornerRadius = 10
-    favoritesButton.layer.cornerRadius = 23
+    favoritesButton.layer.cornerRadius = 20
     trailerButton.layer.cornerRadius = 20
 
     let tapGesture = UITapGestureRecognizer(target: self, action: #selector(backButtonImageTapped))
@@ -56,7 +56,6 @@ class DetailViewController: UIViewController {
 
   private func configureSelectedInfo(){
     guard let game = selectedGameDetail else { return }
-    print(game.backgroundImage ?? "")
     if let url = URL(string: game.backgroundImage ?? "") {
       backgroundImage.kf.setImage(with: url)
       gameImage.kf.setImage(with: url)
