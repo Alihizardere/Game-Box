@@ -12,7 +12,8 @@ import AVKit
 
 class DetailViewController: UIViewController {
   // MARK: - Properties
-  var selectedGame: GameDetail?
+  var selectedGame: Game?
+  var selectedGameDetail: GameDetail?
   @IBOutlet weak var contentView: UIView!
   @IBOutlet weak var backgroundImage: UIImageView!
   @IBOutlet weak var gameImage: UIImageView!
@@ -25,11 +26,19 @@ class DetailViewController: UIViewController {
   @IBOutlet weak var favoritesButton: UIButton!
   @IBOutlet weak var ageImage: UIImageView!
   @IBOutlet weak var ageLabel: UILabel!
-  
+  var viewModel: DetailViewModelProtocol! {
+    didSet { viewModel.delegate = self }
+  }
+
 // MARK: - Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
     setupUI()
+    viewModel = DetailViewModel()
+  }
+
+  override func viewWillAppear(_ animated: Bool) {
+    showInformationView()
   }
 
   // MARK: - Functions
@@ -46,7 +55,7 @@ class DetailViewController: UIViewController {
   }
 
   private func configureSelectedInfo(){
-    guard let game = selectedGame else { return }
+    guard let game = selectedGameDetail else { return }
     print(game.backgroundImage ?? "")
     if let url = URL(string: game.backgroundImage ?? "") {
       backgroundImage.kf.setImage(with: url)
@@ -73,9 +82,10 @@ class DetailViewController: UIViewController {
     let infoView = InformationCustomView(frame: contentView.bounds)
     contentView.addSubview(infoView)
 
-    if let game = selectedGame {
-      let description = game.descriptionRaw ?? "No description available"
+    if let gameDetail = selectedGameDetail, let game = selectedGame {
+      let description = gameDetail.descriptionRaw ?? "No description available"
       infoView.configure(with: description)
+      infoView.fetchGameScreenShots(game: game)
     }
   }
 
@@ -84,64 +94,68 @@ class DetailViewController: UIViewController {
     let skillsView = SkillCustomView(frame: contentView.bounds)
     contentView.addSubview(skillsView)
 
-    if let game = selectedGame {
+    if let game = selectedGameDetail {
       skillsView.configure(gameDetail: game)
-    }
-  }
-
-  private func saveToFavorites(_ game: GameDetail) {
-
-    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-    let context = appDelegate.persistentContainer.viewContext
-    let fetchRequest = GameEntity.fetchRequest()
-    fetchRequest.predicate = NSPredicate(format: "id == %d", game.id ?? 0)
-
-    do {
-      let results = try context.fetch(fetchRequest)
-      if results.isEmpty {
-        let favoriteGame = GameEntity(context: context)
-        favoriteGame.id = Int64(game.id ?? 0)
-        favoriteGame.name = game.name
-        favoriteGame.released = game.released
-        favoriteGame.backgroundImageURL = game.backgroundImage
-        favoriteGame.rating = game.rating ?? 0
-
-        try context.save()
-        print("Game saved")
-        UIAlertController.showAlert(on: self, title: "Success", message: "Game added to favorites.", primaryButtonTitle: "OK")
-      } else {
-        UIAlertController.showAlert(on: self, title: "Already Added", message: "This game is already in your favorites.", primaryButtonTitle: "OK")
-      }
-
-    } catch {
-      print(error.localizedDescription)
     }
   }
 
   // MARK: - Actions
   @IBAction func trailerButtonTapped(_ sender: UIButton) {
-    guard let gameId = selectedGame?.id else { return }
-    print(gameId)
-    GameLogic.shared.getGameTrailer(gameId: gameId) { result in
-      switch result {
-      case .success(let trailerResponse):
-        if let urlString = trailerResponse.results?.first?.data?.max, let url = URL(string: urlString) {
-          self.playTrailer(url: url)
-        } else {
-          UIAlertController.showAlert(
-            on: self,
-            title: "Info",
-            message: "The trailer for this game has not been uploaded yet.",
-            primaryButtonTitle: "OK"
-          )
-        }
-      case .failure(let error):
-        print(error.localizedDescription)
-      }
-    }
+    guard let gameId = selectedGameDetail?.id else { return }
+    viewModel.getTrailer(gameId: gameId)
   }
 
-  private func playTrailer(url: URL) {
+  @IBAction func favoritesButtonTapped(_ sender: Any) {
+    guard let game = selectedGameDetail else { return }
+    viewModel.saveToGame(game: game)
+  }
+
+  @IBAction func segmentedControlChanged(_ sender: UISegmentedControl) {
+    updateView()
+  }
+  
+  @objc private func backButtonImageTapped() {
+    navigationController?.popViewController(animated: true)
+  }
+}
+
+extension DetailViewController: DetailViewModelDelegate {
+
+  func configureCoreData() -> NSManagedObjectContext? {
+    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+      return nil
+    }
+    return appDelegate.persistentContainer.viewContext
+  }
+
+  func showSuccessAlert() {
+    UIAlertController.showAlert(
+      on: self,
+      title: "Success",
+      message: "Game added to favorites.",
+      primaryButtonTitle: "OK"
+    )
+  }
+
+  func showAlreadyAddedAlert() {
+    UIAlertController.showAlert(
+      on: self,
+      title: "Already Added",
+      message: "This game is already in your favorites.",
+      primaryButtonTitle: "OK"
+    )
+  }
+  
+  func showTrailerAlert() {
+    UIAlertController.showAlert(
+      on: self,
+      title: "Info",
+      message: "The trailer for this game has not been uploaded yet.",
+      primaryButtonTitle: "OK"
+    )
+  }
+
+  func playGameTrailer(url: URL) {
     let player = AVPlayer(url: url)
     let playerViewController = AVPlayerViewController()
     playerViewController.player = player
@@ -151,18 +165,5 @@ class DetailViewController: UIViewController {
         playerViewController.player?.play()
       }
     }
-  }
-
-  @IBAction func favoritesButtonTapped(_ sender: Any) {
-    guard let game = selectedGame else { return }
-    self.saveToFavorites(game)
-  }
-
-  @IBAction func segmentedControlChanged(_ sender: UISegmentedControl) {
-    updateView()
-  }
-  
-  @objc private func backButtonImageTapped() {
-    navigationController?.popViewController(animated: true)
   }
 }

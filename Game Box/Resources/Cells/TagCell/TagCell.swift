@@ -10,8 +10,10 @@ import UIKit
 class TagCell: UICollectionViewCell {
 
   @IBOutlet weak var tagTitle: UILabel!
+  
   override func awakeFromNib() {
     super.awakeFromNib()
+    layer.backgroundColor = UIColor.black.cgColor
     layer.borderWidth = 1
     layer.borderColor = UIColor.lightGray.cgColor
     layer.cornerRadius = 10

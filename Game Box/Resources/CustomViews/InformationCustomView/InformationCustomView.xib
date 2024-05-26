@@ -19,7 +19,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="83S-w6-joX">
-                    <rect key="frame" x="0.0" y="0.0" width="389" height="357"/>
+                    <rect key="frame" x="0.0" y="0.0" width="389" height="321.33333333333331"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="L76-dg-KSq">
                         <size key="itemSize" width="128" height="128"/>
@@ -29,7 +29,7 @@
                     </collectionViewFlowLayout>
                 </collectionView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Açıklama" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="48q-o5-rpr">
-                    <rect key="frame" x="20" y="373" width="76" height="23"/>
+                    <rect key="frame" x="20" y="337.33333333333331" width="76" height="23"/>
                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
@@ -39,7 +39,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </stackView>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8z1-b4-cw3">
-                    <rect key="frame" x="16" y="404" width="357" height="276"/>
+                    <rect key="frame" x="16" y="368.33333333333326" width="357" height="311.66666666666674"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -52,7 +52,7 @@
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="8z1-b4-cw3" secondAttribute="trailing" constant="16" id="CYb-Zu-VuM"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="8z1-b4-cw3" secondAttribute="bottom" id="Hcu-fw-nMY"/>
-                <constraint firstItem="83S-w6-joX" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.5" id="JYp-L5-s4i"/>
+                <constraint firstItem="83S-w6-joX" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.45" id="JYp-L5-s4i"/>
                 <constraint firstItem="48q-o5-rpr" firstAttribute="top" secondItem="83S-w6-joX" secondAttribute="bottom" constant="16" id="QHf-mg-zLE"/>
                 <constraint firstItem="8z1-b4-cw3" firstAttribute="top" secondItem="48q-o5-rpr" secondAttribute="bottom" constant="8" id="d0y-gL-glE"/>
                 <constraint firstItem="48q-o5-rpr" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="gfc-eJ-FRm"/>

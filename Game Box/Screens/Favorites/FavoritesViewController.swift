@@ -84,7 +84,7 @@ extension FavoritesViewController: FavoriteViewModelDelegate {
   }
 
   func showEmptyView() {
-    let emptyView = EmptyView(frame: CGRect(x: 0, y: 200, width: view.frame.width , height: view.frame.height / 2))
+    let emptyView = EmptyView(frame: CGRect(x: 0, y: 0, width: view.frame.width , height: view.frame.height / 2))
     view.addSubview(emptyView)
   }
 

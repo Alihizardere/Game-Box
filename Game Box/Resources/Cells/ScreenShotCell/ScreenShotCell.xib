@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,29 +16,23 @@
                 <rect key="frame" x="0.0" y="0.0" width="166" height="157"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wVf-1r-54j">
-                        <rect key="frame" x="8" y="8" width="150" height="141"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PTt-1x-wAt">
+                        <rect key="frame" x="4" y="4" width="158" height="149"/>
+                    </imageView>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstItem="wVf-1r-54j" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="UAl-UI-b2U"/>
-                <constraint firstItem="wVf-1r-54j" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="Zig-hg-qxc"/>
-                <constraint firstAttribute="bottom" secondItem="wVf-1r-54j" secondAttribute="bottom" constant="8" id="aZ7-n5-jBP"/>
-                <constraint firstAttribute="trailing" secondItem="wVf-1r-54j" secondAttribute="trailing" constant="8" id="wUH-B1-riZ"/>
+                <constraint firstAttribute="trailing" secondItem="PTt-1x-wAt" secondAttribute="trailing" constant="4" id="Oxf-Gy-McB"/>
+                <constraint firstAttribute="bottom" secondItem="PTt-1x-wAt" secondAttribute="bottom" constant="4" id="Xxb-3m-1lM"/>
+                <constraint firstItem="PTt-1x-wAt" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="4" id="fsr-p8-ndl"/>
+                <constraint firstItem="PTt-1x-wAt" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="4" id="q6g-s1-G9a"/>
             </constraints>
             <size key="customSize" width="166" height="157"/>
             <connections>
-                <outlet property="cardView" destination="wVf-1r-54j" id="Eoj-GA-eMO"/>
+                <outlet property="gameScreenShot" destination="PTt-1x-wAt" id="dXf-HZ-YAU"/>
             </connections>
             <point key="canvasLocation" x="132.82442748091603" y="25"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

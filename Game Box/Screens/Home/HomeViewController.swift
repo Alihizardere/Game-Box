@@ -16,6 +16,7 @@ class HomeViewController: UIViewController {
   @IBOutlet weak var pageControl: UIPageControl!
   @IBOutlet weak var backgroundImage: UIImageView!
   @IBOutlet weak var gameCollectionViewTopConstraint: NSLayoutConstraint!
+  var gameInfo: Game?
 
   var viewModel: HomeViewModelProtocol! {
     didSet { viewModel.delegate = self }
@@ -41,24 +42,6 @@ class HomeViewController: UIViewController {
 
   // MARK: - Functions
   private func setupUI(){
-    configurationCollectionView()
-    searchBar.delegate = self
-  }
-
-  private func fetchDetail(gameId: Int) {
-    viewModel.fetchDetail(gameId: gameId)
-  }
-
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == "toDetail" {
-      let destinationVC = segue.destination as! DetailViewController
-      guard let game = sender as? GameDetail else { return }
-      destinationVC.selectedGame = game
-    }
-  }
-
-  private func configurationCollectionView(){
-
     // MARK: - Slider CollectionView
     sliderCollectionView.delegate = self
     sliderCollectionView.dataSource = self
@@ -69,6 +52,17 @@ class HomeViewController: UIViewController {
     gameCollectionView.delegate = self
     gameCollectionView.dataSource = self
     gameCollectionView.register(cellType: GameCell.self)
+
+    searchBar.delegate = self
+  }
+
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "toDetail" {
+      let destinationVC = segue.destination as! DetailViewController
+      guard let gameDetail = sender as? GameDetail else { return }
+      destinationVC.selectedGameDetail = gameDetail
+      destinationVC.selectedGame = gameInfo
+    }
   }
 
   private func updateGameCollectionViewTopConstraint(isActive: Bool) {
@@ -122,7 +116,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     if collectionView ==  gameCollectionView {
       guard let game = viewModel.game(index: indexPath),
             let id = game.id else { return }
-      fetchDetail(gameId: id)
+      viewModel.fetchDetail(gameId: id)
+      gameInfo = game
     }
   }
 
@@ -160,7 +155,7 @@ extension HomeViewController: UISearchBarDelegate {
   }
 }
 
-// MARK: - HomeViewModelDelegate
+// MARK: - HomeViewModelDelegates
 extension HomeViewController:  HomeViewModelDelegate {
   
   func reloadData() {
@@ -186,7 +181,14 @@ extension HomeViewController:  HomeViewModelDelegate {
   }
 
   func showEmptyView() {
-    let emptyView = EmptyView(frame: CGRect(x: 0, y: 200, width: view.frame.width , height: view.frame.height / 2))
+    let emptyView = EmptyView(
+      frame: CGRect(
+        x: 0,
+        y: view.frame.height / 12,
+        width: view.frame.width ,
+        height: view.frame.height / 2
+      )
+    )
     view.addSubview(emptyView)
   }
 

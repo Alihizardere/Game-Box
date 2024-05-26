@@ -9,53 +9,43 @@ import UIKit
 
 class SkillCustomView: UIView {
 
+  // MARK: - Properties
   @IBOutlet weak var publisherCollectionView: UICollectionView!
   @IBOutlet weak var platformCollectionView: UICollectionView!
   @IBOutlet weak var tagCollectionView: UICollectionView!
+  var viewModel: DetailViewModelSkillProtocol! {
+    didSet { viewModel.delegateSkill = self }
+  }
 
-  var publishers = [String]()
-  var platforms = [String]()
-  var tags = [String]()
-
+  // MARK: - Lifecycle
   override init(frame: CGRect) {
     super.init(frame: frame)
     commonInit()
     setupUI()
+    viewModel = DetailViewModel()
   }
 
   required init?(coder: NSCoder) {
     super.init(coder: coder)
   }
 
+  // MARK: - Functions
   private func setupUI() {
-    platformCollectionView.delegate = self
-    platformCollectionView.dataSource = self
-    platformCollectionView.register(cellType: PlatformCell.self)
-
     publisherCollectionView.delegate = self
     publisherCollectionView.dataSource = self
     publisherCollectionView.register(cellType: PublisherCell.self)
 
+    platformCollectionView.delegate = self
+    platformCollectionView.dataSource = self
+    platformCollectionView.register(cellType: PlatformCell.self)
+
     tagCollectionView.delegate = self
     tagCollectionView.dataSource = self
     tagCollectionView.register(cellType: TagCell.self)
-
-    let layout = UICollectionViewFlowLayout()
-    layout.minimumLineSpacing = 5
-    layout.minimumInteritemSpacing = 5
-    layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-    platformCollectionView.collectionViewLayout = layout
   }
 
   func configure(gameDetail: GameDetail){
-    platforms = gameDetail.platforms?.compactMap { $0.platform?.name } ?? []
-    platformCollectionView.reloadData()
-
-    publishers = gameDetail.publishers?.compactMap {$0.name } ?? []
-    publisherCollectionView.reloadData()
-
-    tags = gameDetail.tags?.compactMap { $0.name } ?? []
-    tagCollectionView.reloadData()
+    viewModel.configureCollectionView(game: gameDetail)
   }
 
   private func commonInit() {
@@ -66,6 +56,28 @@ class SkillCustomView: UIView {
     view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     addSubview(view)
   }
+
+  private func calculateCellSize(for text: String?, in collectionView: UICollectionView) -> CGSize {
+
+    guard let text = text else { return .zero }
+    let label = UILabel()
+    label.text = text
+    label.sizeToFit()
+    let cellWidth = label.frame.width + 20
+    let cellHeight: CGFloat
+
+    switch collectionView {
+    case platformCollectionView:
+      cellHeight = collectionView.frame.height / 4
+    case publisherCollectionView:
+      cellHeight = collectionView.frame.height / 2.3
+    case tagCollectionView:
+      cellHeight = collectionView.frame.height / 8
+    default:
+      cellHeight = 50
+    }
+    return CGSize(width: cellWidth, height: cellHeight)
+  }
 }
 
 // MARK: - CollectionView Delegates
@@ -74,11 +86,11 @@ extension SkillCustomView: UICollectionViewDelegate, UICollectionViewDataSource,
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     switch collectionView {
     case platformCollectionView:
-      return platforms.count
+      return viewModel.numberOfItems(in:  "platforms")
     case publisherCollectionView:
-      return publishers.count
+      return viewModel.numberOfItems(in: "publishers")
     case tagCollectionView:
-      return tags.count
+      return viewModel.numberOfItems(in: "tags")
     default:
       return 0
     }
@@ -88,20 +100,17 @@ extension SkillCustomView: UICollectionViewDelegate, UICollectionViewDataSource,
     switch collectionView {
     case platformCollectionView:
       let cell = collectionView.dequeCell(cellType: PlatformCell.self, indexPath: indexPath)
-      let platform = platforms[indexPath.item]
-      cell.backgroundColor = .black
+      let platform = viewModel.item(at: indexPath, in: "platforms")
       cell.platformTitle.text = platform
       return cell
     case publisherCollectionView:
       let cell = collectionView.dequeCell(cellType: PublisherCell.self, indexPath: indexPath)
-      let publisher = publishers[indexPath.item]
-      cell.backgroundColor = .black
+      let publisher = viewModel.item(at: indexPath, in: "publishers")
       cell.publisherName.text = publisher
       return cell
     case tagCollectionView:
       let cell = collectionView.dequeCell(cellType: TagCell.self, indexPath: indexPath)
-      let tag = tags[indexPath.item]
-      cell.backgroundColor = .black
+      let tag = viewModel.item(at: indexPath, in: "tags")
       cell.tagTitle.text = tag
       return cell
     default:
@@ -110,34 +119,28 @@ extension SkillCustomView: UICollectionViewDelegate, UICollectionViewDataSource,
   }
 
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    let section: String
+
     switch collectionView {
     case platformCollectionView:
-      let platform = platforms[indexPath.item]
-      let label = UILabel()
-      label.text = platform
-      label.sizeToFit()
-      let cellWidth = label.frame.width + 20
-      let cellHeight = collectionView.frame.height / 4
-      return CGSize(width: cellWidth, height: cellHeight)
+      section = "platforms"
     case publisherCollectionView:
-      let publisher = publishers[indexPath.item]
-      let label = UILabel()
-      label.text = publisher
-      label.sizeToFit()
-      let cellWidth = label.frame.width + 20
-      let cellHeight = collectionView.frame.height / 2.3
-      return CGSize(width: cellWidth, height: cellHeight)
+      section = "publishers"
     case tagCollectionView:
-      let tag = tags[indexPath.item]
-      let label = UILabel()
-      label.text = tag
-      label.sizeToFit()
-      let cellWidth = label.frame.width + 20
-      let cellHeight = collectionView.frame.height / 8
-      return CGSize(width: cellWidth, height: cellHeight)
+      section = "tags"
     default:
-      return CGSize(width: 50, height: 50)
+      return .zero
     }
+    let item = viewModel.item(at: indexPath, in: section)
+    return calculateCellSize(for: item, in: collectionView)
   }
 }
 
+// MARK: - DetailViewModelSkillDelegate
+extension SkillCustomView: DetailViewModelSkillDelegate {
+  func reloadData() {
+    publisherCollectionView.reloadData()
+    platformCollectionView.reloadData()
+    tagCollectionView.reloadData()
+  }
+}
